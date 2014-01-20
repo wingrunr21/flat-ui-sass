@@ -15,9 +15,9 @@ class Converter
     # This is similar to the process_stylesheet_assets
     # utilized by bootstrap-sass except it is specific to
     # flatui
-    def process_flatui_stylesheet_assets!
+    def process_flat_ui_stylesheet_assets!
       log_status 'Processing stylesheets...'
-      files = read_files('less', flatui_less_files)
+      files = read_files('less', flat_ui_less_files)
 
       log_status '  Converting LESS files to Scss:'
       files.each do |name, file|
@@ -35,8 +35,8 @@ class Converter
       end
     end
 
-    def flatui_less_files
-      @flatui_less_files ||= Dir.chdir "#{@src_path}/less" do
+    def flat_ui_less_files
+      @flat_ui_less_files ||= Dir.chdir "#{@src_path}/less" do
         Dir['**/*.less']
       end
     end

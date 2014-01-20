@@ -26,15 +26,21 @@ spec = Bundler.load.specs.find{|s| s.name == 'bootstrap-sass'}
   require File.join(spec.full_gem_path, 'tasks', 'converter', file) 
 end
 
-require_relative 'converter/flatui_less_conversion'
+require_relative 'converter/flat_ui_less_conversion'
+require_relative 'converter/flat_ui_js_conversion'
+require_relative 'converter/flat_ui_fonts_conversion'
+require_relative 'converter/flat_ui_images_conversion'
 require_relative 'converter/filesystem'
 
 class Converter
   extend Forwardable
   include FileSystem
   include FlatUILessConversion
+  include FlatUIJsConversion
+  include FlatUIFontsConversion
+  include FlatUIImageConversion
 
-  def initialize(type = :free, src_path = './less', dest_path = {})
+  def initialize(type = :free, src_path = './flat_ui', dest_path = {})
     @logger     = Logger.new
     @src_path = File.expand_path(src_path)
     @output_dir = type == :free ? 'flat-ui' : 'flat-ui-pro'
@@ -48,26 +54,36 @@ class Converter
 
   def_delegators :@logger, :log, :log_status, :log_processing, :log_transform, :log_file_info, :log_processed, :log_http_get_file, :log_http_get_files, :silence_log
 
-  def process_flat_ui_free
-    log_status 'Convert Flat UI Free from LESS to SASS'
-  end
-
-  def process_flat_ui_pro
-    log_status 'Convert Flat UI Pro from LESS to SASS'
-    puts " input : #{@src_path}"
+  def process_flat_ui!
+    log_status 'Convert Flat UI from LESS to SASS'
+    puts "   type: #{@output_dir}"
+    puts "  input: #{@src_path}"
     puts " output:"
     puts "     js: #{@dest_path[:js]}"
     puts "   scss: #{@dest_path[:scss]}"
     puts "  fonts: #{@dest_path[:fonts]}"
     puts " images: #{@dest_path[:images]}"
 
-    @dest_path.each { |_, v| FileUtils.mkdir_p(v) }
-    FileUtils.mkdir_p("#{@dest_path[:scss]}/modules")
+    setup_file_structure!
 
-    process_flatui_stylesheet_assets!
+    process_flat_ui_stylesheet_assets!
+    process_flat_ui_javascript_assets!
+    process_flat_ui_font_assets!
+    process_flat_ui_image_assets!
   end
 
   def save_file(path, content, mode='w')
     File.open(path, mode) { |file| file.write(content) }
+  end
+
+  private
+  
+  def setup_file_structure!
+    @dest_path.each do |_, v|
+      FileUtils.rm_rf(v)
+      FileUtils.mkdir_p(v)
+    end
+
+    FileUtils.mkdir_p("#{@dest_path[:scss]}/modules")
   end
 end
