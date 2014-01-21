@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 #
 # Based on the conversion script used for bootstrap-sass
 # https://github.com/twbs/bootstrap-sass/blob/master/tasks/converter.rb
@@ -43,6 +43,7 @@ class Converter
   def initialize(type = :free, src_path = './flat-ui', dest_path = {})
     @logger     = Logger.new
     @src_path = File.expand_path(src_path)
+    @type = type
     @output_dir = type == :free ? 'flat-ui' : 'flat-ui-pro'
     @dest_path = {
       js: File.join('vendor/assets/javascripts', @output_dir),
@@ -74,6 +75,14 @@ class Converter
 
   def save_file(path, content, mode='w')
     File.open(path, mode) { |file| file.write(content) }
+  end
+
+  def free?
+    !pro?
+  end
+
+  def pro?
+    @type == :pro
   end
 
   private

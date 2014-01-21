@@ -56,8 +56,11 @@ class Converter
               file = parameterize_mixin_parent_selector file, mixin
             end
             file = replace_ms_filters(file)
-            file = replace_all file, /-(\$.+-color)/, '-#{\1}'
-            file = replace_all file, /#\{\$\$\{(.+)\}\}/, 'interpolate_variable($\1)'
+            # calc-color mixin only exists in Flat-UI free
+            unless pro?
+              file = replace_all file, /-(\$.+-color)/, '-#{\1}'
+              file = replace_all file, /#\{\$\$\{(.+)\}\}/, 'interpolate_variable($\1)'
+            end
             file = replace_rules(file, '  .list-group-item-') { |rule| extract_nested_rule rule, 'a&' }
             file = replace_all file, /,\s*\.open \.dropdown-toggle& \{(.*?)\}/m,
                                " {\\1}\n  .open & { &.dropdown-toggle {\\1} }"
@@ -163,7 +166,7 @@ class Converter
 
     def fix_relative_asset_url(rule, type)
       # Use a really naive pluralization
-      replace_all rule, /url\('?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)'?\)/, "url(\"#{@output_dir}/\\1\")"  
+      replace_all rule, /url\(['"]?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)['"]?\)/, "url(\"#{@output_dir}/\\1\")"  
     end
 
     def fix_flat_ui_image_assets(file)

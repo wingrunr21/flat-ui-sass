@@ -1,11 +1,12 @@
+# encoding: UTF-8
+
 class Converter
   module FlatUIFontsConversion
     def process_flat_ui_font_assets!
       log_status 'Processing fonts...'
-      files   = read_files('fonts', flat_ui_font_files)
       save_to = @dest_path[:fonts]
-      files.each do |name, content|
-        save_file "#{save_to}/#{name}", content
+      flat_ui_font_files.each do |file|
+        FileUtils.cp "#{@src_path}/fonts/#{file}", "#{save_to}/#{file}"
       end
     end
 
