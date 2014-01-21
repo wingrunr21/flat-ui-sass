@@ -13,7 +13,7 @@ class Converter
 
     def flat_ui_image_files
       @flat_ui_image_files ||= Dir.chdir "#{@src_path}/images" do
-        Dir['switch/**/*']
+        Dir['{switch,tile,todo,icons/svg,icons/png}/**/*']
       end
     end
   end

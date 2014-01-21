@@ -40,7 +40,7 @@ class Converter
   include FlatUIFontsConversion
   include FlatUIImageConversion
 
-  def initialize(type = :free, src_path = './flat_ui', dest_path = {})
+  def initialize(type = :free, src_path = './flat-ui', dest_path = {})
     @logger     = Logger.new
     @src_path = File.expand_path(src_path)
     @output_dir = type == :free ? 'flat-ui' : 'flat-ui-pro'
