@@ -4,10 +4,18 @@
 also provides rake tasks to convert and vendor [Flat-UI Pro]() for use with
 Rails, Compass, and vanilla SASS.
 
+This gem is currently under development! Things are broken and will not work
+correctly.
+
 ## Dependencies
 
 `flat-ui-sass` requires [`bootstrap-sass`](https://github.com/twbs/bootstrap-sass) as well as `sass` >= 3.3.0.rc.2 There are a few things that need
 the features in the 3.3.x version of `sass`.
+
+Right now you need to be running the master branch of `bootstrap-sass` for the
+converter to run:
+
+    gem 'bootstrap-sass', github:'twbs/bootstrap-sass'
 
 `flat-ui-sass` also depends on `term-ansicolor` right now for the logging
 functionality of the converter. This is on the TODO list for removal.
