@@ -43,6 +43,17 @@ Add the following to your Gemfile:
 
 ## Usage
 
+### Converting Flat-UI Pro
+
+You can use the conversion script packaged along with `flat-ui-sass` to
+automatically convert and vendor Flat-UI Pro to your local application:
+
+1. Place the Flat-UI-Pro directory (e.g. the one with the less, js, font, image,
+   etc files in it) in a directory at the root of your app titled `flat-ui-pro`
+2. Run `bundle exec rake flat_ui_pro:convert`. You should see a lot of output
+   regarding the conversion process. When it is finished, Flat-UI Pro should be
+converted and available in the `vendor/assets/` directory.
+
 ### Rails
 
 Import bootstrap and then Flat-UI in `application.css.scss`:
