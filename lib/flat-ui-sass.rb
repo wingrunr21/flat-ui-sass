@@ -1,6 +1,7 @@
 # Based on bootstrap-sass.rb
 # https://github.com/twbs/bootstrap-sass/blob/master/lib/bootstrap-sass.rb
 
+require "bootstrap-sass"
 require "flat-ui-sass/version"
 
 module FlatUI
@@ -52,6 +53,10 @@ module FlatUI
       defined?(::Rails)
     end
 
+    def pro?
+      Dir.exists? File.join(assets_path, 'stylesheets', 'flat-ui-pro') 
+    end
+
     private
 
     def configure_sass
@@ -62,8 +67,9 @@ module FlatUI
     end
 
     def register_compass_extension
+      ext_name = pro? ? 'flat-ui-pro' : 'flat-ui'
       ::Compass::Frameworks.register(
-          'bootstrap',
+          ext_name,
           :path                  => gem_path,
           :stylesheets_directory => stylesheets_path,
           :templates_directory   => File.join(gem_path, 'templates')
