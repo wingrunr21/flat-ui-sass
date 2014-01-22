@@ -34,17 +34,16 @@ class Converter
           when 'flat-ui.less'
             lines = file.split "\n"
             lines.reject! {|line|
-              line =~ /fonts|url/ #kill the fonts lines, those are up to the user
+              #kill the fonts lines, those are up to the user
+              #kill variables since those need to be manually imported before bootstrap
+              line =~ /fonts|url|variables/ 
             }
 
+            # Add a comment for the icon font
             icon_font_import = lines.index {|line| line =~ /icon-font/}
             lines.insert(icon_font_import, '// Flat-UI-Icons')
+            lines.delete_at(icon_font_import+2)
 
-            #load variables first
-            vars_import = lines.index {|line| line =~ /variables/}
-            lines.insert(1, lines.delete_at(vars_import))
-            lines.insert(2, lines.delete_at(vars_import+1))
-            lines.insert(1, lines.delete_at(vars_import+2))
             file = lines.join "\n"
           when 'mixins.less'
             NESTED_MIXINS.each do |selector, prefix|
@@ -69,6 +68,7 @@ class Converter
             file = fix_relative_asset_url file, :font
             file = replace_asset_url file, :font
           when 'variables.less'
+            file = insert_default_vars(file)
             file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
               // defaults to true if twbs-font-path function is present (no function => twbs-font-path('') parsed as string == right side)

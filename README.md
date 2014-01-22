@@ -55,15 +55,20 @@ converted and available in the `vendor/assets/` directory.
 
 #### SCSS
 
-Import bootstrap and then Flat-UI in `application.css.scss`:
+Import the Flat-UI variables, bootstrap, and then Flat-UI in `application.css.scss`:
 
+    @import 'flat-ui/variables';
     @import 'boostrap';
     @import 'flat-ui';
 
 For Flat-UI Pro, simply import `flat-ui-pro` instead:
 
+    @import 'flat-ui-pro/variables';
     @import 'boostrap';
     @import 'flat-ui-pro';
+
+You must import the Flat-UI variables before bootstrap, otherwise bootstrap's
+variables will take priority!
 
 #### Javascript
 Flat-UI has a lot of javascript dependencies. It is up to you to make sure the

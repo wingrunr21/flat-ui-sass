@@ -13,422 +13,422 @@ $flat-ui-sass-asset-helper: function-exists(flat-ui-font-path) !default;
 // Color Swatches
 // --------------------------------------------------
 
-$turquoise: 					#1abc9c;
-$green-sea: 					#16a085;
+$turquoise: 					#1abc9c !default;
+$green-sea: 					#16a085 !default;
 
-$emerald: 						#2ecc71;
-$nephritis: 					#27ae60;
+$emerald: 						#2ecc71 !default;
+$nephritis: 					#27ae60 !default;
 
-$peter-river: 					#3498db;
-$belize-hole: 					#2980b9;
+$peter-river: 					#3498db !default;
+$belize-hole: 					#2980b9 !default;
 
-$amethyst: 						#9b59b6;
-$wisteria: 					  	#8e44ad;
+$amethyst: 						#9b59b6 !default;
+$wisteria: 					  	#8e44ad !default;
 
-$wet-asphalt: 					#34495e;
-$midnight-blue: 				#2c3e50;
+$wet-asphalt: 					#34495e !default;
+$midnight-blue: 				#2c3e50 !default;
 
-$sun-flower: 					#f1c40f;
-$orange: 						#f39c12;
+$sun-flower: 					#f1c40f !default;
+$orange: 						#f39c12 !default;
 
-$carrot: 						#e67e22;
-$pumpkin: 						#d35400;
+$carrot: 						#e67e22 !default;
+$pumpkin: 						#d35400 !default;
 
-$alizarin: 						#e74c3c;
-$pomegranate: 					#c0392b;
+$alizarin: 						#e74c3c !default;
+$pomegranate: 					#c0392b !default;
 
-$clouds: 						#ecf0f1;
-$silver: 						#bdc3c7;
+$clouds: 						#ecf0f1 !default;
+$silver: 						#bdc3c7 !default;
 
-$concrete: 						#95a5a6;
-$asbestos: 						#7f8c8d;
+$concrete: 						#95a5a6 !default;
+$asbestos: 						#7f8c8d !default;
 
 
 // Grays
 // -------------------------
 
-$gray:            				$concrete;
-$gray-light:     				$silver;
-$inverse:          				white;
+$gray:            				$concrete !default;
+$gray-light:     				$silver !default;
+$inverse:          				white !default;
 
 
 // Brand colors
 // -------------------------
 
-$brand-primary:         		$wet-asphalt;
-$brand-secondary:       		$turquoise;
-$brand-success:         		$emerald;
-$brand-warning:         		$sun-flower;
-$brand-danger:          		$alizarin;
-$brand-info:            		$peter-river;
+$brand-primary:         		$wet-asphalt !default;
+$brand-secondary:       		$turquoise !default;
+$brand-success:         		$emerald !default;
+$brand-warning:         		$sun-flower !default;
+$brand-danger:          		$alizarin !default;
+$brand-info:            		$peter-river !default;
 
 
 // Social colors
 // -------------------------
 
-$social-pinterest:   			#cb2028;
-$social-linkedin:    			#0072b5;
-$social-stumbleupon: 			#ed4a13;
-$social-googleplus:  			#2d2d2d;
-$social-facebook:    			#2f4b93;
-$social-twitter:     			#00bdef;
+$social-pinterest:   			#cb2028 !default;
+$social-linkedin:    			#0072b5 !default;
+$social-stumbleupon: 			#ed4a13 !default;
+$social-googleplus:  			#2d2d2d !default;
+$social-facebook:    			#2f4b93 !default;
+$social-twitter:     			#00bdef !default;
 
 
 // Scaffolding
 // -------------------------
 
-$body-bg:               		#fff;
-$text-color:            		$brand-primary;
+$body-bg:               		#fff !default;
+$text-color:            		$brand-primary !default;
 
 
 // Links
 // -------------------------
 
-$link-color:       				$green-sea;
-$link-hover-color: 				$turquoise;
+$link-color:       				$green-sea !default;
+$link-hover-color: 				$turquoise !default;
 
 
 // Typography
 // -------------------------
 
-$font-family-base:  			"Lato", Helvetica, Arial, sans-serif;
-$font-family-demo:				"Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-monospace: 		Monaco, Menlo, Consolas, "Courier New", monospace;
-$font-size-base:    			18px;
+$font-family-base:  			"Lato", Helvetica, Arial, sans-serif !default;
+$font-family-demo:				"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-monospace: 		Monaco, Menlo, Consolas, "Courier New", monospace !default;
+$font-size-base:    			18px !default;
 
-$font-size-h1:          		floor($font-size-base * 3.444); // ~62px
-$font-size-h2:          		ceil($font-size-base * 2.889); // ~52px
-$font-size-h3:          		ceil($font-size-base * 2.222); // ~40px
-$font-size-h4:          		ceil($font-size-base * 1.611); // ~29px
-$font-size-h5:          		floor($font-size-base * 1.556); // ~28px
-$font-size-h6:          		ceil($font-size-base * 1.333); // ~24px
+$font-size-h1:          		floor($font-size-base * 3.444) !default; // ~62px
+$font-size-h2:          		ceil($font-size-base * 2.889) !default; // ~52px
+$font-size-h3:          		ceil($font-size-base * 2.222) !default; // ~40px
+$font-size-h4:          		ceil($font-size-base * 1.611) !default; // ~29px
+$font-size-h5:          		floor($font-size-base * 1.556) !default; // ~28px
+$font-size-h6:          		ceil($font-size-base * 1.333) !default; // ~24px
 
-$line-height-base:  			1.72222; // 31/18
-$line-height-computed:  		floor($font-size-base * $line-height-base); // ~31px
+$line-height-base:  			1.72222 !default; // 31/18
+$line-height-computed:  		floor($font-size-base * $line-height-base) !default; // ~31px
 
-$headings-font-family:  		$font-family-base;
-$headings-font-weight:  		700;
-$headings-line-height:  		1.1;
-$headings-color:        		inherit;
+$headings-font-family:  		$font-family-base !default;
+$headings-font-weight:  		700 !default;
+$headings-line-height:  		1.1 !default;
+$headings-color:        		inherit !default;
 
 
 // Icons
 // -------------------------
 
-$icon-normal: 					16px;
-$icon-medium: 					18px;
-$icon-large:  					32px;
+$icon-normal: 					16px !default;
+$icon-medium: 					18px !default;
+$icon-large:  					32px !default;
 
 
 // Border-radius
 // -------------------------
 
-$border-radius-base:            4px;
-$border-radius-large:           6px;
-$border-radius-small:           3px;
+$border-radius-base:            4px !default;
+$border-radius-large:           6px !default;
+$border-radius-small:           3px !default;
 
 
 
 // COMPONENT VARIABLES
 // --------------------------------------------------
 
-$component-font-size-base: ceil($font-size-base * 0.833); // ~15px
+$component-font-size-base: ceil($font-size-base * 0.833) !default; // ~15px
 
 
 // Form controls
 // -------------------------
 
-$input-font-size-base:	   		$component-font-size-base;
-$input-font-size-sm:	   		floor($component-font-size-base * 0.867); // ~13px
-$input-font-size-lg:	   		ceil($component-font-size-base * 1.133); // ~17px
-$input-font-size-hg:	   		floor($component-font-size-base * 1.467); // ~22px
+$input-font-size-base:	   		$component-font-size-base !default;
+$input-font-size-sm:	   		floor($component-font-size-base * 0.867) !default; // ~13px
+$input-font-size-lg:	   		ceil($component-font-size-base * 1.133) !default; // ~17px
+$input-font-size-hg:	   		floor($component-font-size-base * 1.467) !default; // ~22px
 
-$input-line-height-base:   		1.467; // ~22px
-$input-line-height-sm:	   		1.462; // ~19px
-$input-line-height-lg:	   		1.235; // ~21px
-$input-line-height-hg:	   		1.318; // ~29px
+$input-line-height-base:   		1.467 !default; // ~22px
+$input-line-height-sm:	   		1.462 !default; // ~19px
+$input-line-height-lg:	   		1.235 !default; // ~21px
+$input-line-height-hg:	   		1.318 !default; // ~29px
 
-$input-icon-font-size:	   		ceil($component-font-size-base * 1.333);  // ~20px			 
+$input-icon-font-size:	   		ceil($component-font-size-base * 1.333) !default;  // ~20px			 
 
-$input-bg:                 		$inverse;
-$input-bg-disabled:        		mix($gray, white, 10%);
+$input-bg:                 		$inverse !default;
+$input-bg-disabled:        		mix($gray, white, 10%) !default;
 
-$input-height-small:       		35px;
-$input-height-base:        		41px;
-$input-height-large:       		45px;
-$input-height-huge:        		53px;
+$input-height-small:       		35px !default;
+$input-height-base:        		41px !default;
+$input-height-large:       		45px !default;
+$input-height-huge:        		53px !default;
 
-$input-border-radius:	   		$border-radius-large;
+$input-border-radius:	   		$border-radius-large !default;
 
-$legend-color:             		inherit;
+$legend-color:             		inherit !default;
 
 
 // Pagination
 // -------------------------
 
-$pagination-color: 				mix($brand-primary, white, 20%);
+$pagination-color: 				mix($brand-primary, white, 20%) !default;
 
 
 // Pager
 // -------------------------
 
-$pager-padding: 				9px 15px 10px;
+$pager-padding: 				9px 15px 10px !default;
 
 
 // Buttons
 // -------------------------
 
-$btn-font-size-base: 			$component-font-size-base;
-$btn-font-size-xs:	       		ceil($component-font-size-base * 0.80);   // ~12px
-$btn-font-size-sm:	       		floor($component-font-size-base * 0.867); // ~13px
-$btn-font-size-lg:	       		ceil($component-font-size-base * 1.133);  // ~17px
-$btn-font-size-hg:	       		floor($component-font-size-base * 1.467); // ~22px
+$btn-font-size-base: 			$component-font-size-base !default;
+$btn-font-size-xs:	       		ceil($component-font-size-base * 0.80) !default;   // ~12px
+$btn-font-size-sm:	       		floor($component-font-size-base * 0.867) !default; // ~13px
+$btn-font-size-lg:	       		ceil($component-font-size-base * 1.133) !default;  // ~17px
+$btn-font-size-hg:	       		floor($component-font-size-base * 1.467) !default; // ~22px
 
-$btn-line-height-base:			1.4;   // ~21px
-$btn-line-height-hg:			1.227; // ~27px
-$btn-line-height-lg:			1.471; // ~25px
-$btn-line-height-sm:			1.385; // ~16px
-$btn-line-height-xs:			1.083; // ~13px
+$btn-line-height-base:			1.4 !default;   // ~21px
+$btn-line-height-hg:			1.227 !default; // ~27px
+$btn-line-height-lg:			1.471 !default; // ~25px
+$btn-line-height-sm:			1.385 !default; // ~16px
+$btn-line-height-xs:			1.083 !default; // ~13px
 
-$btn-font-weight:				normal;
+$btn-font-weight:				normal !default;
 
-$btn-default-color:				$inverse;
-$btn-default-bg:				$gray-light;
-$btn-hover-bg:					mix($gray-light, white, 80%);
-$btn-active-bg:					mix($gray-light, black, 85%);
+$btn-default-color:				$inverse !default;
+$btn-default-bg:				$gray-light !default;
+$btn-hover-bg:					mix($gray-light, white, 80%) !default;
+$btn-active-bg:					mix($gray-light, black, 85%) !default;
 
-$btn-primary-hover-bg:			mix($brand-secondary, white, 80%);
-$btn-primary-active-bg:			mix($brand-secondary, black, 85%);
+$btn-primary-hover-bg:			mix($brand-secondary, white, 80%) !default;
+$btn-primary-active-bg:			mix($brand-secondary, black, 85%) !default;
 
-$btn-info-hover-bg:				mix($brand-info, white, 80%);
-$btn-info-active-bg:			mix($brand-info, black, 85%);
+$btn-info-hover-bg:				mix($brand-info, white, 80%) !default;
+$btn-info-active-bg:			mix($brand-info, black, 85%) !default;
 
-$btn-success-hover-bg:			mix($brand-success, white, 80%);
-$btn-success-active-bg:			mix($brand-success, black, 85%);
+$btn-success-hover-bg:			mix($brand-success, white, 80%) !default;
+$btn-success-active-bg:			mix($brand-success, black, 85%) !default;
 
-$btn-danger-hover-bg:			mix($brand-danger, white, 80%);
-$btn-danger-active-bg:			mix($brand-danger, black, 85%);
+$btn-danger-hover-bg:			mix($brand-danger, white, 80%) !default;
+$btn-danger-active-bg:			mix($brand-danger, black, 85%) !default;
 
-$btn-warning-hover-bg:			overlay($brand-warning, darken(white, 37.5%));
-$btn-warning-active-bg:			mix($brand-warning, black, 85%);
+$btn-warning-hover-bg:			overlay($brand-warning, darken(white, 37.5%)) !default;
+$btn-warning-active-bg:			mix($brand-warning, black, 85%) !default;
 
-$btn-inverse-hover-bg:			overlay($brand-primary, darken(white, 37.5%));
-$btn-inverse-active-bg:			mix($brand-primary, black, 85%);
+$btn-inverse-hover-bg:			overlay($brand-primary, darken(white, 37.5%)) !default;
+$btn-inverse-active-bg:			mix($brand-primary, black, 85%) !default;
 
-$btn-link-disabled-color:		$gray-light;
+$btn-link-disabled-color:		$gray-light !default;
 
 
 // Navbar
 // -------------------------
 
 // Basics of a navbar
-$zindex-navbar:            		1000;
-$zindex-navbar-fixed:     		1030;
-$navbar-height-base:            53px;
-$navbar-height-lg:              76px;
-$navbar-input-line-height:		1.4; // ~21px
-$navbar-margin-bottom:          $line-height-computed;
-$navbar-border-radius:          $border-radius-large;
+$zindex-navbar:            		1000 !default;
+$zindex-navbar-fixed:     		1030 !default;
+$navbar-height-base:            53px !default;
+$navbar-height-lg:              76px !default;
+$navbar-input-line-height:		1.4 !default; // ~21px
+$navbar-margin-bottom:          $line-height-computed !default;
+$navbar-border-radius:          $border-radius-large !default;
 
 // Default navbar
 //
-$navbar-default-bg:             saturate(adjust-hue(tint($brand-primary, 91%), -18), 2%);
+$navbar-default-bg:             saturate(adjust-hue(tint($brand-primary, 91%), -18), 2%) !default;
 
 // Navbar links
-$navbar-default-link-color: 			$brand-primary;
-$navbar-default-link-hover-color: 		$brand-secondary;
-$navbar-default-link-hover-bg: 			transparent;
-$navbar-default-link-active-color: 		$brand-secondary;
-$navbar-default-link-active-bg: 		transparent;
-$navbar-default-link-disabled-color: 	#ccc;
-$navbar-default-link-disabled-bg: 		transparent;
+$navbar-default-link-color: 			$brand-primary !default;
+$navbar-default-link-hover-color: 		$brand-secondary !default;
+$navbar-default-link-hover-bg: 			transparent !default;
+$navbar-default-link-active-color: 		$brand-secondary !default;
+$navbar-default-link-active-bg: 		transparent !default;
+$navbar-default-link-disabled-color: 	#ccc !default;
+$navbar-default-link-disabled-bg: 		transparent !default;
 
 // Navbar nav carets
-$navbar-default-caret-color:			$navbar-default-link-color;
-$navbar-default-caret-hover-color:		$navbar-default-link-hover-color;
-$navbar-default-caret-active-color:		$navbar-default-link-active-color;
+$navbar-default-caret-color:			$navbar-default-link-color !default;
+$navbar-default-caret-hover-color:		$navbar-default-link-hover-color !default;
+$navbar-default-caret-active-color:		$navbar-default-link-active-color !default;
 
 // Navbar brand label
-$navbar-default-brand-color:            $navbar-default-link-color;
-$navbar-default-brand-hover-color:      $navbar-default-link-hover-color;
-$navbar-default-brand-hover-bg:         transparent;
+$navbar-default-brand-color:            $navbar-default-link-color !default;
+$navbar-default-brand-hover-color:      $navbar-default-link-hover-color !default;
+$navbar-default-brand-hover-bg:         transparent !default;
 
 // Navbar toggle
-$navbar-default-toggle-color:         	$navbar-default-link-color;
-$navbar-default-toggle-hover-color:   	$navbar-default-link-hover-color;
+$navbar-default-toggle-color:         	$navbar-default-link-color !default;
+$navbar-default-toggle-hover-color:   	$navbar-default-link-hover-color !default;
 
 // Navbar form
-$navbar-default-form-placeholder:		adjust-hue(tint($brand-primary, 60%), 2);
-$navbar-default-form-icon:				desaturate(tint($brand-primary, 45%), 2%);
-$navbar-default-form-border:            shade($navbar-default-bg, 3%);
+$navbar-default-form-placeholder:		adjust-hue(tint($brand-primary, 60%), 2) !default;
+$navbar-default-form-icon:				desaturate(tint($brand-primary, 45%), 2%) !default;
+$navbar-default-form-border:            shade($navbar-default-bg, 3%) !default;
 
 // Inverted navbar
 //
-$navbar-inverse-divider:				darken($brand-primary, 3%);
+$navbar-inverse-divider:				darken($brand-primary, 3%) !default;
 
 // Reset inverted navbar basics
-$navbar-inverse-color:          		$inverse;
-$navbar-inverse-bg:             		$brand-primary;
-$navbar-inverse-border:         		darken($navbar-inverse-bg, 10%);
+$navbar-inverse-color:          		$inverse !default;
+$navbar-inverse-bg:             		$brand-primary !default;
+$navbar-inverse-border:         		darken($navbar-inverse-bg, 10%) !default;
 
 // Inverted navbar links
-$navbar-inverse-link-color:             $inverse;
-$navbar-inverse-link-hover-color:       $brand-secondary;
-$navbar-inverse-link-hover-bg:          transparent;
-$navbar-inverse-link-active-color:      $navbar-inverse-link-color;
-$navbar-inverse-link-active-bg:         $brand-secondary;
-$navbar-inverse-link-disabled-color:    #444;
-$navbar-inverse-link-disabled-bg:       transparent;
+$navbar-inverse-link-color:             $inverse !default;
+$navbar-inverse-link-hover-color:       $brand-secondary !default;
+$navbar-inverse-link-hover-bg:          transparent !default;
+$navbar-inverse-link-active-color:      $navbar-inverse-link-color !default;
+$navbar-inverse-link-active-bg:         $brand-secondary !default;
+$navbar-inverse-link-disabled-color:    #444 !default;
+$navbar-inverse-link-disabled-bg:       transparent !default;
 
 // Navbar nav carets
-$navbar-inverse-caret-color:			lighten(desaturate($brand-primary, 7%), 9%);
-$navbar-inverse-caret-hover-color:		$navbar-inverse-link-hover-color;
-$navbar-inverse-caret-active-color:		$navbar-inverse-link-active-color;
+$navbar-inverse-caret-color:			lighten(desaturate($brand-primary, 7%), 9%) !default;
+$navbar-inverse-caret-hover-color:		$navbar-inverse-link-hover-color !default;
+$navbar-inverse-caret-active-color:		$navbar-inverse-link-active-color !default;
 
 // Inverted navbar brand label
-$navbar-inverse-brand-color:            $navbar-inverse-link-color;
-$navbar-inverse-brand-hover-color:      $navbar-inverse-link-hover-color;
-$navbar-inverse-brand-hover-bg:         transparent;
+$navbar-inverse-brand-color:            $navbar-inverse-link-color !default;
+$navbar-inverse-brand-hover-color:      $navbar-inverse-link-hover-color !default;
+$navbar-inverse-brand-hover-bg:         transparent !default;
 
 // Inverted navbar toggle
-$navbar-inverse-toggle-color:         	$navbar-inverse-link-color;
-$navbar-inverse-toggle-hover-color:   	$navbar-inverse-link-hover-color;
+$navbar-inverse-toggle-color:         	$navbar-inverse-link-color !default;
+$navbar-inverse-toggle-hover-color:   	$navbar-inverse-link-hover-color !default;
 
 // Navbar form
-$navbar-inverse-form-bg:				darken($brand-primary, 6%);
-$navbar-inverse-form-placeholder:		desaturate(lighten($brand-primary, 13%), 7%);
-$navbar-inverse-form-icon:				desaturate(lighten($brand-primary, 13%), 6%);
-$navbar-inverse-form-border:        	$navbar-inverse-divider;
+$navbar-inverse-form-bg:				darken($brand-primary, 6%) !default;
+$navbar-inverse-form-placeholder:		desaturate(lighten($brand-primary, 13%), 7%) !default;
+$navbar-inverse-form-icon:				desaturate(lighten($brand-primary, 13%), 6%) !default;
+$navbar-inverse-form-border:        	$navbar-inverse-divider !default;
 
 // Dropdown menu
-$navbar-inverse-dropdown-arrow:				$navbar-inverse-bg;
-$navbar-inverse-dropdown-bg:				$navbar-inverse-bg;
-$navbar-inverse-dropdown-link-color:		mix($navbar-inverse-bg, $navbar-inverse-color, 15%);
-$navbar-inverse-dropdown-link-hover-color:	$inverse;
-$navbar-inverse-dropdown-link-hover-bg:		$brand-secondary;
+$navbar-inverse-dropdown-arrow:				$navbar-inverse-bg !default;
+$navbar-inverse-dropdown-bg:				$navbar-inverse-bg !default;
+$navbar-inverse-dropdown-link-color:		mix($navbar-inverse-bg, $navbar-inverse-color, 15%) !default;
+$navbar-inverse-dropdown-link-hover-color:	$inverse !default;
+$navbar-inverse-dropdown-link-hover-bg:		$brand-secondary !default;
 
 
 // Dropdown Menu
 // -------------------------
 
-$dropdown-background: mix($inverse, $brand-primary, 94%);
+$dropdown-background: mix($inverse, $brand-primary, 94%) !default;
 
 
 // Iconbar
 // -------------------------
 
-$iconbar-background: mix($brand-primary, black, 85%);
+$iconbar-background: mix($brand-primary, black, 85%) !default;
 
 
 // Progress
 // -------------------------
 
-$progress-height: 12px;
+$progress-height: 12px !default;
 
 
 // Slider
 // -------------------------
 
-$slider-height: 		  		12px;
-$slider-value-font-size:  		floor($component-font-size-base * 0.867); // ~13px;
+$slider-height: 		  		12px !default;
+$slider-value-font-size:  		floor($component-font-size-base * 0.867); // ~13px !default;
 
-$slider-handle-bg: 		  		mix($brand-secondary, black, 85%);
-$slider-handle-hover-bg:  		mix($brand-secondary, white, 80%);
-$slider-handle-active-bg: 		mix($brand-secondary, black, 85%);
+$slider-handle-bg: 		  		mix($brand-secondary, black, 85%) !default;
+$slider-handle-hover-bg:  		mix($brand-secondary, white, 80%) !default;
+$slider-handle-active-bg: 		mix($brand-secondary, black, 85%) !default;
 
-$slider-range-bg: 		  		$brand-secondary;
+$slider-range-bg: 		  		$brand-secondary !default;
 
-$slider-segment-bg: 	  		mix(desaturate($brand-primary, 15%), white, 20%);
+$slider-segment-bg: 	  		mix(desaturate($brand-primary, 15%), white, 20%) !default;
 
 
 // Switch
 // -------------------------
 
-$switch-border-radius: 30px;
-$switch-width: 80px;
+$switch-border-radius: 30px !default;
+$switch-width: 80px !default;
 
 
 // Media queries breakpoints
 // --------------------------------------------------
 
 // Extra small screen / phone
-$screen-xs-min:              	480px;
+$screen-xs-min:              	480px !default;
 
 // Small screen / tablet
-$screen-sm-min:              	768px;
+$screen-sm-min:              	768px !default;
 
 // Medium screen / desktop
-$screen-md-min:              	992px;
+$screen-md-min:              	992px !default;
 
 // Large screen / wide desktop
-$screen-lg-min:              	1200px;
+$screen-lg-min:              	1200px !default;
 
 // So media queries don't overlap when required, provide a maximum
-$screen-xs-max:              	($screen-sm-min - 1);
-$screen-sm-max:              	($screen-md-min - 1);
-$screen-md-max:              	($screen-lg-min - 1);
+$screen-xs-max:              	($screen-sm-min - 1) !default;
+$screen-sm-max:              	($screen-md-min - 1) !default;
+$screen-md-max:              	($screen-lg-min - 1) !default;
 
 
 // Grid system
 // --------------------------------------------------
 
 // Number of columns in the grid system
-$grid-columns:              	12;
+$grid-columns:              	12 !default;
 // Padding, to be divided by two and applied to the left and right of all columns
-$grid-gutter-width:         	30px;
+$grid-gutter-width:         	30px !default;
 // Point at which the navbar stops collapsing
-$grid-float-breakpoint:     	$screen-sm-min;
+$grid-float-breakpoint:     	$screen-sm-min !default;
 
 
 // Form states and alerts
 // -------------------------
 
-$state-success-text:            $brand-success;
-$state-success-bg:              #dff0d8;
-$state-success-border:          darken(adjust-hue($state-success-bg, -10), 5%);
+$state-success-text:            $brand-success !default;
+$state-success-bg:              #dff0d8 !default;
+$state-success-border:          darken(adjust-hue($state-success-bg, -10), 5%) !default;
 
-$state-info-text:               $brand-info;
-$state-info-bg:                 #d9edf7;
-$state-info-border:             darken(adjust-hue($state-info-bg, -10), 7%);
+$state-info-text:               $brand-info !default;
+$state-info-bg:                 #d9edf7 !default;
+$state-info-border:             darken(adjust-hue($state-info-bg, -10), 7%) !default;
 
-$state-warning-text:            $brand-warning;
-$state-warning-bg:              #fcf8e3;
-$state-warning-border:          darken(adjust-hue($state-warning-bg, -10), 5%);
+$state-warning-text:            $brand-warning !default;
+$state-warning-bg:              #fcf8e3 !default;
+$state-warning-border:          darken(adjust-hue($state-warning-bg, -10), 5%) !default;
 
-$state-danger-text:             $brand-danger;
-$state-danger-bg:               #f2dede;
-$state-danger-border:           darken(adjust-hue($state-danger-bg, -10), 5%);
+$state-danger-text:             $brand-danger !default;
+$state-danger-bg:               #f2dede !default;
+$state-danger-border:           darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
 
 // Code
 // ------------------------
 
-$code-color:                  	#c7254e;
-$code-bg:                     	#f9f2f4;
+$code-color:                  	#c7254e !default;
+$code-bg:                     	#f9f2f4 !default;
 
-$pre-bg:                      	$inverse;
-$pre-color:                   	inherit;
-$pre-border-color:            	mix($brand-primary, $inverse, 12%);
-$pre-scrollable-max-height:   	340px;
-$pre-border-radius:				$border-radius-large;
+$pre-bg:                      	$inverse !default;
+$pre-color:                   	inherit !default;
+$pre-border-color:            	mix($brand-primary, $inverse, 12%) !default;
+$pre-scrollable-max-height:   	340px !default;
+$pre-border-radius:				$border-radius-large !default;
 
 
 // Type
 // ------------------------
 
-$text-muted:                  	$gray-light;
-$abbr-border-color:           	$gray-light;
-$headings-small-color:        	mix($brand-primary, $inverse, 12%);
-$blockquote-small-color:      	inherit;
-$blockquote-border-color:     	mix($brand-primary, $inverse, 12%);
-$page-header-border-color:    	mix($brand-primary, $inverse, 12%);
+$text-muted:                  	$gray-light !default;
+$abbr-border-color:           	$gray-light !default;
+$headings-small-color:        	mix($brand-primary, $inverse, 12%) !default;
+$blockquote-small-color:      	inherit !default;
+$blockquote-border-color:     	mix($brand-primary, $inverse, 12%) !default;
+$page-header-border-color:    	mix($brand-primary, $inverse, 12%) !default;
 
 
 // Miscellaneous
 // -------------------------
 
 // Hr border color
-$hr-border:                   	mix($brand-primary, $inverse, 63%);
+$hr-border:                   	mix($brand-primary, $inverse, 63%) !default;
 
 // Horizontal forms & lists
-$component-offset-horizontal: 	180px;
+$component-offset-horizontal: 	180px !default;
