@@ -1,10 +1,10 @@
 # Flat UI for Sass
 
 `flat-ui-sass` is a SASS port of Designmodo's [Flat-UI Free](http://designmodo.github.io/Flat-UI/). `flat-ui-sass`
-also provides a rake task to convert and vendor [Flat-UI Pro](http://designmodo.com/flat/) for use with
+also provides a rake task to convert and locally vendor [Flat-UI Pro](http://designmodo.com/flat/) for use with
 Rails, Compass, and vanilla SASS.
 
-#####This gem is currently under development! Things are broken and may not work correctly.
+##### This gem is currently under development! Things are broken and may not work correctly!
 
 ## Dependencies
 
@@ -125,7 +125,7 @@ Not done yet
 1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
 2. Add Rake task for downloading/vendoring various JS dependencies
 3. Remove `term-ansicolor` dependency in converter
-4. More user-friendly logging
+4. More user-friendly logging (less verbose)
 
 ## Development and Contributing
 
@@ -157,3 +157,5 @@ The conversion scripts and general gem structure rely upon and are heavily
 influenced by the work done on [bootstrap-sass](https://github.com/twbs/bootstrap-sass). This gem would not be possible without all of the hard work put into that project.
 
 Thanks also go to [Designmodo](http://designmodo.com/) for creating and publishing Flat-UI.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wingrunr21/flat-ui-sass/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
