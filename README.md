@@ -1,16 +1,14 @@
 # Flat UI for Sass
 
-`flat-ui-sass` is a SASS port of Designmodo's [Flat-UI Free](). `flat-ui-sass`
-also provides rake tasks to convert and vendor [Flat-UI Pro]() for use with
+`flat-ui-sass` is a SASS port of Designmodo's [Flat-UI Free](http://designmodo.github.io/Flat-UI/). `flat-ui-sass`
+also provides a rake task to convert and vendor [Flat-UI Pro](http://designmodo.com/flat/) for use with
 Rails, Compass, and vanilla SASS.
 
-This gem is currently under development! Things are broken and will not work
-correctly.
+#####This gem is currently under development! Things are broken and may not work correctly.
 
 ## Dependencies
 
-`flat-ui-sass` requires [`bootstrap-sass`](https://github.com/twbs/bootstrap-sass) as well as `sass` >= 3.3.0.rc.2 There are a few things that need
-the features in the 3.3.x version of `sass`.
+`flat-ui-sass` requires [`bootstrap-sass`](https://github.com/twbs/bootstrap-sass) as well as `sass >= 3.3.0.rc.2`.
 
 Right now you need to be running the master branch of `bootstrap-sass` for the
 converter to run:
@@ -20,14 +18,9 @@ converter to run:
 `flat-ui-sass` also depends on `term-ansicolor` right now for the logging
 functionality of the converter. This is on the TODO list for removal.
 
-Flat-UI itself depends on jQuery, jQuery UI, and various javascript
-dependencies. This gem does not depend on any of these directly. A rake task
-is on the TODO list for either generating bower entries or vendoring the the
-files directly.
-
-Finally, Flat-UI uses the [Lato](https://www.google.com/fonts/specimen/Lato)
-font as its base font. This gem does not vendor Lato as there are better ways
-of getting that font on the page
+Flat-UI uses the [Lato](https://www.google.com/fonts/specimen/Lato)
+font as its base font. This gem does not vendor Lato. It is up to you to make
+sure Lato is available on your page.
 
 ## Installation
 
@@ -39,7 +32,11 @@ Add the following to your Gemfile:
 
 ### Compass (no Rails)
 
+Not done yet
+
 ### vanilla SASS (no Compass or Rails)
+
+Not done yet
 
 ## Usage
 
@@ -56,6 +53,8 @@ converted and available in the `vendor/assets/` directory.
 
 ### Rails
 
+#### SCSS
+
 Import bootstrap and then Flat-UI in `application.css.scss`:
 
     @import 'boostrap';
@@ -66,8 +65,12 @@ For Flat-UI Pro, simply import `flat-ui-pro` instead:
     @import 'boostrap';
     @import 'flat-ui-pro';
 
-Require jQuery, jQuery UI, javascript deps, and Flat-UI in
-`application.js.coffee`:
+#### Javascript
+Flat-UI has a lot of javascript dependencies. It is up to you to make sure the
+appropriate javascript files are available in your appliction. The below are
+example dependencies as used in the `index.html` demo page.
+
+In `application.js`:
 
     //= require jquery
     //= require jquery.ui.core
@@ -86,14 +89,67 @@ Require jQuery, jQuery UI, javascript deps, and Flat-UI in
     //= require jquery.placeholder
     //= require jquery.stacktable
 
-Flat-UI and Flat-UI Pro both have the same javascript dependencies
+For Flat-UI Pro:
+
+    //= require jquery
+    //= require jquery.ui.core
+    //= require jquery.ui.widget
+    //= require jquery.ui.mouse
+    //= require jquery.ui.position
+    //= require jquery.ui.button
+    //= require jquery.ui.datepicker
+    //= require jquery.ui.slider
+    //= require jquery.ui.spinner
+    //= require jquery.ui.tooltip
+    //= require jquery.ui.effect
+    //= require jquery.ui.touch-punch.min
+    //= require bootstrap
+    //= require bootstrap-select
+    //= require bootstrap-switch
+    //= require flat-ui-pro
+    //= require jquery.tagsinput
+    //= require jquery.placeholder
+    //= require jquery.stacktable
+    //= require bootstrap-typeahead
+
+### Compass (no Rails)
+
+Not done yet
+
+### vanilla SASS (no Compass or Rails)
+
+Not done yet
 
 ## Roadmap
 
-1. Add Flat-UI modules that are missing in Flat-UI Pro to the pro manifest
+1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
 2. Add Rake task for downloading/vendoring various JS dependencies
+3. Remove `term-ansicolor` dependency in converter
+4. More user-friendly logging
 
 ## Development and Contributing
+
+This gem uses a modified version of the converter utilized in [bootstrap-sass](https://github.com/twbs/bootstrap-sass). The converter runs over the checked-out Flat-UI git submodule and vendors the resulting files in `vendor/assets`. The converter does the following:
+
+* Converts the LESS to SASS, fixing `@import` orders to load correct under SASS.
+* Generates a `flat-ui.scss` or `flat-ui-pro.scss` manifest
+* Copies Flat-UI javascript files and generates a `flat-ui.js` or
+  `flat-ui-pro.js` manifest
+* Copies the Flat-UI Icons font
+* Copies supporting Flat-UI images
+
+The converter is located in `lib/tasks/`
+
+Version numbers for the current versions of Flat-UI and Flat-UI Pro that the
+converter works against are in `version.rb`
+
+### Developing
+
+1. Clone this repository to a working directory
+2. Initialize the Flat-UI submodule (`git submodule update --init`)
+3. Create a new topic branch for your changes (`git checkout -b my_new_feature`)
+4. Make some changes
+5. Run `rake flat_ui:convert` to convert Flat-UI and vendor it
 
 ## Credits
 
