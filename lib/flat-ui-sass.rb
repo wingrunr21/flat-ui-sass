@@ -36,6 +36,10 @@ module FlatUI
       File.join assets_path, 'javascripts'
     end
 
+    def images_path
+      File.join assets_path, 'images'
+    end
+
     def assets_path
       @assets_path ||= File.join gem_path, 'vendor', 'assets'
     end
@@ -54,7 +58,7 @@ module FlatUI
     end
 
     def pro?
-      Dir.exists? File.join(assets_path, 'stylesheets', 'flat-ui-pro') 
+      Dir.exists? File.join(stylesheets_path, 'flat-ui-pro')
     end
 
     private
@@ -67,9 +71,8 @@ module FlatUI
     end
 
     def register_compass_extension
-      ext_name = pro? ? 'flat-ui-pro' : 'flat-ui'
       ::Compass::Frameworks.register(
-          ext_name,
+          pro? ? 'flat-ui-pro' :  'flat-ui',
           :path                  => gem_path,
           :stylesheets_directory => stylesheets_path,
           :templates_directory   => File.join(gem_path, 'templates')

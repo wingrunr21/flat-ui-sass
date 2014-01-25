@@ -1,0 +1,5 @@
+<% require 'flat-ui-sass/version' %>
+// Override Flat-UI variables here.
+// Flat-UI version <%= FlatUI::VERSION %>
+
+<%= File.read(@template[:options][:flatui_variables_path]).gsub(/^(?=\$)/, '//').gsub(/ !default/, '') %>

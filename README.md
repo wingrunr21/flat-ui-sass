@@ -30,9 +30,34 @@ Add the following to your Gemfile:
 
     gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
 
-### Compass (no Rails)
+### Compass (no Rails, Flat-UI free only right now)
 
-Not done yet
+Install the gem:
+
+    gem install flat-ui-sass
+
+or add it to your Gemfile:
+
+    gem 'flat-ui-sass', github: 'wingrunr21/flat-ui-sass'
+
+For existing projects:
+
+    # config.rb:
+    require 'flat-ui-sass'
+
+    bundle exec compass install flat-ui
+
+For new projects:
+
+    bundle exec compass create new_project -r flat-ui-sass --using flat-ui
+
+The resulting Compass project will have all Flat-UI JS/fonts/images as well as
+the bootstrap JS/fonts.
+
+The following SCSS files will also be created:
+
+* [_variables.scss](/templates/project/_variables.scss.erb) - all of the Flat UI variables (override them here).
+* [styles.scss](/templates/project/styles.scss) - primary SCSS file, import `variables`, `flat-ui/variables`, `bootstrap`, and `flat-ui`.
 
 ### vanilla SASS (no Compass or Rails)
 
@@ -155,6 +180,8 @@ converter works against are in `version.rb`
 3. Create a new topic branch for your changes (`git checkout -b my_new_feature`)
 4. Make some changes
 5. Run `rake flat_ui:convert` to convert Flat-UI and vendor it
+6. Possible bower support
+7. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
 
 ## Credits
 
