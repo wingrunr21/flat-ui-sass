@@ -83,13 +83,13 @@ converted and available in the `vendor/assets/` directory.
 Import the Flat-UI variables, bootstrap, and then Flat-UI in `application.css.scss`:
 
     @import 'flat-ui/variables';
-    @import 'boostrap';
+    @import 'bootstrap';
     @import 'flat-ui';
 
 For Flat-UI Pro, simply import `flat-ui-pro` instead:
 
     @import 'flat-ui-pro/variables';
-    @import 'boostrap';
+    @import 'bootstrap';
     @import 'flat-ui-pro';
 
 You must import the Flat-UI variables before bootstrap, otherwise bootstrap's
