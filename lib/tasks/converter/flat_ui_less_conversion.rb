@@ -81,8 +81,8 @@ class Converter
             file = extract_nested_rule file, '.btn-hg&'
           when 'modules/forms.less'
             file = replace_all file, "\t", "  "
-            # Fix mixin regex not support non-variable arguments
-            file.gsub! /@include input-size\((?:\$.+)\);$/ do |match|
+            # Fix mixin regex not supporting non-variable arguments
+            file.gsub! /@include input-size\((?:\$.+)\);/ do |match|
               match.gsub /; /, ', '
             end
             file = apply_mixin_parent_selector(file, '\.input-(?:sm|lg|hg)')
@@ -95,13 +95,19 @@ class Converter
             file = fix_flat_ui_image_assets file
           when 'modules/navbar.less'
             file = replace_all file, "\t", "  "
-            file.gsub! /@include input-size\((?:\$.+)\);$/ do |match|
+            # Fix mixin regex not supporting non-variable arguments
+            file.gsub! /@include input-size\((?:\$.+)\);/ do |match|
               match.gsub /; /, ', '
             end
             file = apply_mixin_parent_selector(file, '\.navbar-input')
           when 'modules/select.less'
             # Fix the include that the converter makes an extend
             file = replace_all file, /@extend \.caret/, '@include caret'
+          when 'modules/spinner.less'
+            # Fix mixin regex not supporting non-variable arguments
+            file.gsub! /@include spinner-variant\((?:\$?.+)\);/ do |match|
+              match.gsub /; /, ', '
+            end
           when 'modules/switch.less'
             file = fix_flat_ui_image_assets file
           when 'modules/tile.less'
@@ -162,6 +168,16 @@ class Converter
     # Methods overriden from the bootstrap-sass converter
     def replace_asset_url(rule, type)
       replace_all rule, /url\((.*?)\)/, "url(if($flat-ui-sass-asset-helper, flat-ui-#{type}-path(\\1), \\1))"
+    end
+
+    # Regex will match things like spinner-input-width
+    # by default.
+    #
+    # Fix the first lookaround to be a positive
+    # lookaround and also check for word chars
+    # after the word 'spin'
+    def replace_spin(less)
+      less.gsub(/(?<![\-$@.])spin(?![\-\w])/, 'adjust-hue')
     end
 
     def fix_relative_asset_url(rule, type)
