@@ -1,43 +1,43 @@
 // Flat UI main stylesheet that aggregates all modules
 
 // Flat-UI-Icons
-@import "icon-font";
+@import "flat-ui/icon-font";
 
 // Utility mixins for greater good
-@import "mixins";
+@import "flat-ui/mixins";
 
-@import "scaffolding";
+@import "flat-ui/scaffolding";
 
 // Modules
-@import "modules/type";
-@import "modules/code";
-@import "modules/buttons";
-@import "modules/button-groups";
-@import "modules/caret";
-@import "modules/select";
-@import "modules/forms";
-@import "modules/input-icons";
-@import "modules/input-groups";
-@import "modules/checkbox-and-radio";
-@import "modules/navbar";
-@import "modules/tagsinput";
-@import "modules/progress-bars";
-@import "modules/slider";
-@import "modules/pager";
-@import "modules/pagination";
-@import "modules/tooltip";
-@import "modules/dropdown";
-@import "modules/switch";
-@import "modules/share";
+@import "flat-ui/modules/type";
+@import "flat-ui/modules/code";
+@import "flat-ui/modules/buttons";
+@import "flat-ui/modules/button-groups";
+@import "flat-ui/modules/caret";
+@import "flat-ui/modules/select";
+@import "flat-ui/modules/forms";
+@import "flat-ui/modules/input-icons";
+@import "flat-ui/modules/input-groups";
+@import "flat-ui/modules/checkbox-and-radio";
+@import "flat-ui/modules/navbar";
+@import "flat-ui/modules/tagsinput";
+@import "flat-ui/modules/progress-bars";
+@import "flat-ui/modules/slider";
+@import "flat-ui/modules/pager";
+@import "flat-ui/modules/pagination";
+@import "flat-ui/modules/tooltip";
+@import "flat-ui/modules/dropdown";
+@import "flat-ui/modules/switch";
+@import "flat-ui/modules/share";
 
 // Examples
-@import "modules/palette";
-@import "modules/tile";
-@import "modules/todo";
-@import "modules/video";
-@import "modules/login";
+@import "flat-ui/modules/palette";
+@import "flat-ui/modules/tile";
+@import "flat-ui/modules/todo";
+@import "flat-ui/modules/video";
+@import "flat-ui/modules/login";
 
-@import "modules/footer";
+@import "flat-ui/modules/footer";
 
 // Spaces
-@import "spaces";
+@import "flat-ui/spaces";

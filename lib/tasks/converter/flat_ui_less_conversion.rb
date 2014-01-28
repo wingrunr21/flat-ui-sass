@@ -70,8 +70,7 @@ class Converter
             file = replace_asset_url file, :font
           when 'variables.less'
             file = replace_all file, "\t", "  "
-            file.gsub! "
-", ""
+            file.gsub! "", ""
             file = insert_default_vars(file)
             file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
