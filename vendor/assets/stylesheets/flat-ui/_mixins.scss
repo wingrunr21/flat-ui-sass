@@ -819,12 +819,12 @@
 
 // Spinner variants
 // -------------------------
-@mixin adjust-huener-variant($up-btn-height, $down-btn-height, $line-height) {
-  & + .ui-adjust-huener-button {
+@mixin spinner-variant($up-btn-height, $down-btn-height, $line-height) {
+  & + .ui-spinner-button {
     height: $up-btn-height;
     line-height: $line-height;
   }
-  & + .ui-adjust-huener-button + .ui-adjust-huener-button {
+  & + .ui-spinner-button + .ui-spinner-button {
     height: $down-btn-height;
     line-height: $line-height;
   }
