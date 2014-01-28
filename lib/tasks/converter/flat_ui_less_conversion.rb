@@ -203,10 +203,10 @@ class Converter
       replace_all rule, /url\((.*?)\)/, "url(if($flat-ui-sass-asset-helper, flat-ui-#{type}-path(\\1), \\1))"
     end
 
-    # @import "file" to "#{File.basename(@src_path)}/file"
+    # @import "file" to "#{@output_dir)}/file"
     def replace_file_imports(file)
       file.gsub %r([@\$]import ["|'](.*)["|'];),
-                %Q(@import "#{File.basename(@src_path)}/\\1";)
+                %Q(@import "#{@output_dir}/\\1";)
     end
 
     # Regex will match things like spinner-input-width
