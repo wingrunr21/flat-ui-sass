@@ -68,6 +68,8 @@ class Converter
             file = fix_relative_asset_url file, :font
             file = replace_asset_url file, :font
           when 'variables.less'
+            file = replace_all file, "\t", "  "
+            file = replace_all file, "", ""
             file = insert_default_vars(file)
             file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
@@ -75,6 +77,7 @@ class Converter
               // in Sass 3.3 this can be improved with: function-exists(twbs-font-path)
               $flat-ui-sass-asset-helper: function-exists(flat-ui-font-path) !default;
             SCSS
+            file = fix_variable_declaration_order file
           when 'modules/buttons.less'
             file = replace_all file, "\t", "  "
             file = extract_nested_rule file, '.btn-xs&'
@@ -163,6 +166,34 @@ class Converter
       rule = "#{unindent(name)} {\n"
       styles.each {|s| rule += indent "#{s}\n"}
       rule += "}\n"
+    end
+
+    # TODO this method is a on the brittle side
+    # look into make it more robust
+    def fix_variable_declaration_order(file)
+      # Spinner needs to be moved after Buttons
+      # since it depends on $btn-default-bg
+      #
+      # also spinner-btn-hover-bg needs to be
+      # before spinner-up-btn-border
+      if file.include? 'Spinner'
+        lines = file.split "\n"
+        spinner_start = lines.index {|l| l =~ /Spinner/}
+        spinner_end = lines.index {|l| l =~ /Pagination/} - 1
+        buttons_end = lines.index {|l| l =~ /Navs/} - 1
+
+        (spinner_end - spinner_start).times do
+          lines.insert(buttons_end, lines.delete_at(spinner_start))
+        end
+
+        spinner_btn_bg = lines.index {|l| l =~ /spinner-btn-bg:/}-1
+        3.times do
+          lines.insert(spinner_btn_bg+5, lines.delete_at(spinner_btn_bg))
+        end
+
+        file = lines.join("\n")
+      end
+      file
     end
 
     # Methods overriden from the bootstrap-sass converter
