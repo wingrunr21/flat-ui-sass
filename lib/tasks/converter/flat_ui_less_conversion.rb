@@ -29,6 +29,7 @@ class Converter
         # apply common conversions
         # icon-font bombs on this so skip it
         file = convert_less(file) unless name =~ /icon-font|flat-ui/
+        file = replace_file_imports(file)
 
         case name
           when 'flat-ui.less'
@@ -36,7 +37,7 @@ class Converter
             lines.reject! {|line|
               #kill the fonts lines, those are up to the user
               #kill variables since those need to be manually imported before bootstrap
-              line =~ /fonts|url|variables/ 
+              line =~ /fonts|url|variables/
             }
 
             # Add a comment for the icon font
@@ -69,7 +70,8 @@ class Converter
             file = replace_asset_url file, :font
           when 'variables.less'
             file = replace_all file, "\t", "  "
-            file.gsub! "", ""
+            file.gsub! "
+", ""
             file = insert_default_vars(file)
             file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
@@ -162,7 +164,7 @@ class Converter
       file.insert(close, indent(rules))
     end
 
-    def create_rule(name, *styles) 
+    def create_rule(name, *styles)
       rule = "#{unindent(name)} {\n"
       styles.each {|s| rule += indent "#{s}\n"}
       rule += "}\n"
@@ -201,6 +203,12 @@ class Converter
       replace_all rule, /url\((.*?)\)/, "url(if($flat-ui-sass-asset-helper, flat-ui-#{type}-path(\\1), \\1))"
     end
 
+    # @import "file" to "#{@output_dir)}/file"
+    def replace_file_imports(file)
+      file.gsub %r([@\$]import ["|'](.*)["|'];),
+                %Q(@import "#{@output_dir}/\\1";)
+    end
+
     # Regex will match things like spinner-input-width
     # by default.
     #
@@ -213,7 +221,7 @@ class Converter
 
     def fix_relative_asset_url(rule, type)
       # Use a really naive pluralization
-      replace_all rule, /url\(['"]?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)['"]?\)/, "url(\"#{@output_dir}/\\1\")"  
+      replace_all rule, /url\(['"]?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)['"]?\)/, "url(\"#{@output_dir}/\\1\")"
     end
 
     def fix_flat_ui_image_assets(file)
@@ -221,7 +229,7 @@ class Converter
       file = fix_relative_asset_url file, :image
       file = replace_asset_url file, :image
     end
-    
+
     # Fix to support replacing mixin definitions with default args
     # https://github.com/twbs/bootstrap-sass/blob/master/tasks/converter/less_conversion.rb#L286
     #
