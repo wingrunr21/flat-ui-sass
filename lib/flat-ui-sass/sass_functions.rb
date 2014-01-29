@@ -36,6 +36,16 @@ module Sass::Script::Functions
       mix(white, color, percentage)
     end
   end
+  
+  unless Sass::Script::Functions.instance_methods.include?(:fade)
+    def fade(color, amount)
+      if amount.is_a?(Sass::Script::Number) && amount.unit_str == "%"
+        amount = Sass::Script::Number.new(1 - amount.value / 100.0)
+      end
+      fade_out(color, amount)
+    end
+    declare :fade, [:color, :amount]
+  end
 
   # Based on https://github.com/edwardoriordan/sass-utilities/blob/master/lib/sass-utilities.rb
   def interpolate_variable(name)
