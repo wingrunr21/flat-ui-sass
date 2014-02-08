@@ -9,11 +9,5 @@ module FlatUI
         end
       end
     end
-
-    class Railtie < ::Rails::Railtie
-      rake_tasks do
-        load "tasks/flat-ui-sass.rake"
-      end
-    end
   end
 end
