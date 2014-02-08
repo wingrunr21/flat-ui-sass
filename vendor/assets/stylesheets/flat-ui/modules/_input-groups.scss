@@ -73,7 +73,7 @@
     border: 2px solid $gray-light;    
     color: $gray-light;
     line-height: 18px;
-  }  
+  } 
   .btn-default {
     @include button-variant($btn-default-color, $gray-light, $btn-hover-bg, $btn-active-bg);
   }
@@ -86,24 +86,16 @@
   .input-group-sm & .btn {
     line-height: 19px;
   }
-  // Negative margin to only have a 2px border between the two
   &:first-child > .btn {
-    margin-right: -2px;
     border-right-width: 0;
+    margin-right: -2px;
   }
   &:last-child > .btn {
-    margin-left: -4px;
     border-left-width: 0;
+    margin-left: -2px;
   }
-  & > .btn-default {
-    // Jankily prevent input button groups from wrapping
-    + .btn-default {
-      border-left: 2px solid $gray-light;
-      margin-left: -4px;
-    }
-    &:first-child + btn-default {
-      margin-left: -1px;
-    }
+  & > .btn-default + .btn-default {
+    border-left: 2px solid $gray-light;
   }
   & > .btn:first-child + .btn {
     .caret {
@@ -122,14 +114,14 @@
     
 
 
-  }  
+  } 
   .form-control:first-child,
   .input-group-btn:first-child .btn {
     @include border-left-radius(20px);
     
 
 
-  }  
+  } 
   // Remove left padding for .form-control after button
   .input-group-btn + .form-control {
     padding-left: 0;

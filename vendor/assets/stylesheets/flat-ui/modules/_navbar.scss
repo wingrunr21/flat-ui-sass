@@ -15,6 +15,17 @@
   border-radius: $navbar-border-radius;
 }
 
+// Navbar heading
+//
+// Groups `.navbar-brand` and `.navbar-toggle` into a single component for easy
+// styling of responsive aspects.
+
+.navbar-header {
+  @media (min-width: $grid-float-breakpoint) {
+    float: left;
+  }
+}
+
 // Navbar collapse (body)
 //
 // Group your navbar content into this for easy collapsing and expanding across
@@ -28,8 +39,8 @@
 .navbar-collapse {
   box-shadow: none;
   padding-right: 21px;
-  padding-left: 21px;
-  
+  padding-left: 21px;  
+
   @media (min-width: $grid-float-breakpoint) {
     // Account for first and last children spacing
     .navbar-nav.navbar-left:first-child {
@@ -58,12 +69,30 @@
       }
     }     
   }
-  @media (max-width: $grid-float-breakpoint) {
+  @media (max-width: $grid-float-breakpoint-max) {
     .navbar-nav.navbar-right:last-child {
       margin-bottom: 3px;
     }
-  }  
+  }
 }  
+
+// Both navbar header and collapse
+//
+// When a container is present, change the behavior of the header and collapse.
+
+.container,
+.container-fluid {
+  > .navbar-header,
+  > .navbar-collapse {
+    margin-right: -21px;
+    margin-left:  -21px;
+
+    @media (min-width: $grid-float-breakpoint) {
+      margin-right: 0;
+      margin-left:  0;
+    }
+  }
+}
 
 //
 // Navbar alignment options
@@ -98,7 +127,7 @@
   font-size: floor($component-font-size-base * 1.6); // ~24px
   line-height: 1.042;  // ~25px
   font-weight: 700;
-  padding: 14px 21px;
+  padding: (($navbar-height-base - 25px) / 2) 21px;
   
   > [class*="fui-"] {
     font-size: floor($component-font-size-base * 1.267); // ~19px
@@ -107,7 +136,8 @@
   }
   
   @media (min-width: $grid-float-breakpoint) {
-    .navbar > .container & {
+    .navbar > .container &,
+    .navbar > .container-fluid & {
       margin-left: -21px;
     }
   }
@@ -163,7 +193,7 @@
   
   > li > a {
     font-size: floor($component-font-size-base * 1.067); // ~16px
-    padding: 15px 21px;
+    padding: (($navbar-height-base - 23px) / 2) 21px;
     line-height: 23px;
     font-weight: 700;
   }
@@ -198,7 +228,7 @@
     }
   }
   
-  @media (max-width: $grid-float-breakpoint) {
+  @media (max-width: $grid-float-breakpoint-max) {
     margin: 0 -21px;
     
     // Dropdowns get custom display when collapsed
@@ -223,7 +253,7 @@
 // Extension of the `.form-inline` with some extra flavor for optimum display in
 // our navbars.
 
-@include input-size('.navbar-input', $input-height-small, 5px, 10px, $input-font-size-sm, $navbar-input-line-height);
+@include input-size('.navbar-input', $input-height-small, 5px, 10px, $input-font-size-small, $navbar-input-line-height);
 
 .navbar-form {
   @include box-shadow(none);
@@ -234,15 +264,23 @@
 
   // Vertically center in expanded, horizontal navbar
   @include navbar-vertical-align($input-height-small);
+
+  .form-group {
+    @media (max-width: $grid-float-breakpoint-max) {
+      margin-bottom: 5px;
+    }
+  }
   
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $grid-float-breakpoint-max) {
     margin: 3px -21px;
     width: auto;
   }
   
   .navbar-nav + &.navbar-left,
   &.navbar-right:last-child { // Width fix for Webkit and IE11
-    width: 260px; 
+    @media (min-width: $grid-float-breakpoint) {
+      width: 260px; 
+    }
   }
   
   // Controls sizing
@@ -264,7 +302,7 @@
     margin-left: 4px;
   }
 
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $grid-float-breakpoint-max) {
     .form-group {
       margin-bottom: 0;
       
@@ -282,18 +320,18 @@
 .navbar-nav > li {
   > .dropdown-menu {
     min-width: 100%;
-    border-radius: $border-radius-base;    
+    border-radius: $border-radius-base;   
     
-    @media (max-width: $grid-float-breakpoint) {
+    @media (max-width: $grid-float-breakpoint-max) {
       @include transition(all 0s);
       display: none;
     }
   }
   &.open > .dropdown-menu {
-    @media (max-width: $grid-float-breakpoint) {
+    @media (max-width: $grid-float-breakpoint-max) {
       margin-top: 0 !important;
       display: block;
-    }    
+    }   
   }
 } 
 
@@ -322,7 +360,6 @@
   @include navbar-vertical-align(23px, $navbar-height-base);
 
   @media (min-width: $grid-float-breakpoint) {
-    float: left;
     margin-left: 21px;
     margin-right: 21px;
 
@@ -338,16 +375,16 @@
 // Vertically center a button within a navbar (when *not* in a form).
 
 .navbar-btn {
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-top: (($navbar-height-base - $input-height-base) / 2);
+  margin-bottom: (($navbar-height-base - $input-height-base) / 2);
 
   &.btn-sm {
-    margin-top: 9px;
-    margin-bottom: 8px;
+    margin-top: (($navbar-height-base - $input-height-small) / 2);
+    margin-bottom: (($navbar-height-base - $input-height-small) / 2) - 1;
   }
   &.btn-xs {
-    margin-top: 14px;
-    margin-bottom: 14px;
+    margin-top: (($navbar-height-base - 25) / 2);
+    margin-bottom: (($navbar-height-base - 25) / 2);
   }
 }
 
@@ -366,7 +403,7 @@
   position: absolute;
   right: 12px;
   text-align: center;
-  top: 15px; // top: 28px;
+  top: 35%;
   width: 6px;
   z-index: 10;
   
@@ -413,7 +450,7 @@
   .navbar-toggle {
     &:before {
       color: $navbar-default-toggle-color;
-    }    
+    }   
     &:hover,
     &:focus {
       background-color: transparent;
@@ -492,7 +529,7 @@
     } 
 
 
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $grid-float-breakpoint-max) {
       // Dropdowns get custom display when collapsed
       .open .dropdown-menu {
         > li > a {
@@ -542,7 +579,7 @@
       .input-group-btn .btn {
          border-color: $brand-secondary;
          color: $brand-secondary;
-      }      
+      }     
     }
   }
   
@@ -565,7 +602,7 @@
   background-color: $navbar-inverse-bg;
   
   .navbar-brand {
-    color: $navbar-inverse-brand-color;    
+    color: $navbar-inverse-brand-color;   
     &:hover,
     &:focus {
       color: $navbar-inverse-brand-hover-color;
@@ -576,7 +613,7 @@
   .navbar-toggle {
     &:before {
       color: $navbar-inverse-toggle-color;
-    }    
+    }   
     &:hover,
     &:focus {
       background-color: transparent;
@@ -667,7 +704,7 @@
             color: $navbar-inverse-dropdown-link-hover-color;
             background-color: $navbar-inverse-dropdown-link-hover-bg;
           }
-        }    
+        }   
         > .divider {
           background-color: $navbar-inverse-divider;
           height: 2px;
@@ -677,7 +714,7 @@
       }
     }
 
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $grid-float-breakpoint-max) {
        > li > a {
          border-left-width: 0;
        }
@@ -740,10 +777,10 @@
       .input-group-btn .btn {
          border-color: $brand-secondary;
          color: $brand-secondary;
-      }      
+      }     
     }
     
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $grid-float-breakpoint-max) {
       border-color: $navbar-inverse-form-border;
       border-width: 2px 0;
     }
@@ -785,12 +822,12 @@
 
 // Large navbar
 .navbar-lg {
-  min-height: $navbar-height-lg;
+  min-height: $navbar-height-large;
   
   .navbar-brand {
     line-height: 1;
-    padding-top: 25px;
-    padding-bottom: 26px;
+    padding-top: (($navbar-height-large - 24px) / 2);
+    padding-bottom: (($navbar-height-large - 24px) / 2);
   
     > [class*="fui-"] {
       font-size: floor($component-font-size-base * 1.6); // ~24px
@@ -804,41 +841,36 @@
       line-height: 1.6;
       
       @media (min-width: $grid-float-breakpoint) {
-        padding-top: 26px;
-        padding-bottom: 26px;
+        padding-top: (($navbar-height-large - 24px) / 2);
+        padding-bottom: (($navbar-height-large - 24px) / 2);
       }
-    }    
+    }   
   }
   
   .navbar-toggle {
-    height: $navbar-height-lg;
-    line-height: $navbar-height-lg;
-  }
-  
-  .navbar-unread,
-  .navbar-new {
-    top: 28px;
+    height: $navbar-height-large;
+    line-height: $navbar-height-large;
   }
   
   .navbar-form {
-    @include navbar-vertical-align($input-height-small, $navbar-height-lg);
+    @include navbar-vertical-align($input-height-small, $navbar-height-large);
   }
   
   .navbar-text {
-    @include navbar-vertical-align(23px, $navbar-height-lg);
+    @include navbar-vertical-align(23px, $navbar-height-large);
   }
   
   .navbar-btn {
-    margin-top: 18px;
-    margin-bottom: 17px;
+    margin-top: (($navbar-height-large - $input-height-base) / 2);
+    margin-bottom: (($navbar-height-large - $input-height-base) / 2);
     
     &.btn-sm {
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: (($navbar-height-large - $input-height-small) / 2);
+      margin-bottom: (($navbar-height-large - $input-height-small) / 2);
     }
     &.btn-xs {
-      margin-top: 25px;
-      margin-bottom: 25px;
+      margin-top: (($navbar-height-large - 25px) / 2);
+      margin-bottom: (($navbar-height-large - 25px) / 2);
     }
   }
 }

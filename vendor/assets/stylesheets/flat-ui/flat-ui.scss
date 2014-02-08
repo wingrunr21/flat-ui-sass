@@ -1,16 +1,17 @@
 // Flat UI main stylesheet that aggregates all modules
 
 // Flat-UI-Icons
-@import "flat-ui/icon-font";
+@import "flat-ui/modules/glyphicons";
 
 // Utility mixins for greater good
 @import "flat-ui/mixins";
 
-@import "flat-ui/scaffolding";
+@import "flat-ui/modules/scaffolding";
 
 // Modules
 @import "flat-ui/modules/type";
 @import "flat-ui/modules/code";
+@import "flat-ui/modules/thumbnails";
 @import "flat-ui/modules/buttons";
 @import "flat-ui/modules/button-groups";
 @import "flat-ui/modules/caret";
@@ -21,6 +22,7 @@
 @import "flat-ui/modules/checkbox-and-radio";
 @import "flat-ui/modules/navbar";
 @import "flat-ui/modules/tagsinput";
+@import "flat-ui/modules/typeahead";
 @import "flat-ui/modules/progress-bars";
 @import "flat-ui/modules/slider";
 @import "flat-ui/modules/pager";
