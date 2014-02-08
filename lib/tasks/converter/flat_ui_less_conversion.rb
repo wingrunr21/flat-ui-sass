@@ -28,7 +28,7 @@ class Converter
 
         # apply common conversions
         # icon-font bombs on this so skip it
-        file = convert_less(file) unless name =~ /icon-font|flat-ui/
+        file = convert_less(file) unless name =~ /flat-ui|glyphicons/
         file = replace_file_imports(file)
 
         case name
@@ -41,7 +41,7 @@ class Converter
             }
 
             # Add a comment for the icon font
-            icon_font_import = lines.index {|line| line =~ /icon-font/}
+            icon_font_import = lines.index {|line| line =~ /glyphicons/}
             lines.insert(icon_font_import, '// Flat-UI-Icons')
             lines.delete_at(icon_font_import+2)
 
@@ -52,7 +52,7 @@ class Converter
             end
             file = varargify_mixin_definitions(file, *VARARG_MIXINS)
             file = deinterpolate_vararg_mixins(file)
-            %w(responsive-(in)?visibility input-size).each do |mixin|
+            %w(responsive-(in)?visibility input-size text-emphasis-variant bg-variant).each do |mixin|
               file = parameterize_mixin_parent_selector file, mixin
             end
             file = replace_ms_filters(file)
@@ -64,41 +64,43 @@ class Converter
             file = replace_rules(file, '  .list-group-item-') { |rule| extract_nested_rule rule, 'a&' }
             file = replace_all file, /,\s*\.open \.dropdown-toggle& \{(.*?)\}/m,
                                " {\\1}\n  .open & { &.dropdown-toggle {\\1} }"
+            file = replace_all file, '$ratio, $ratio-y', '$scale-args'
             file = convert_grid_mixins file
-          when 'icon-font.less'
-            file = fix_relative_asset_url file, :font
-            file = replace_asset_url file, :font
           when 'variables.less'
-            file = replace_all file, "\t", "  "
-            file.gsub! "", ""
             file = insert_default_vars(file)
             file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
               // defaults to true if twbs-font-path function is present (no function => twbs-font-path('') parsed as string == right side)
               // in Sass 3.3 this can be improved with: function-exists(twbs-font-path)
               $flat-ui-sass-asset-helper: function-exists(flat-ui-font-path) !default;
+
             SCSS
             file = fix_variable_declaration_order file
+            file = replace_all file, /(\$icon-font-path:\s+).*(!default)/, '\1"'+@output_dir+'/" \2'
           when 'modules/buttons.less'
-            file = replace_all file, "\t", "  "
             file = extract_nested_rule file, '.btn-xs&'
             file = extract_nested_rule file, '.btn-hg&'
           when 'modules/forms.less'
-            file = replace_all file, "\t", "  "
             # Fix mixin regex not supporting non-variable arguments
             file.gsub! /@include input-size\((?:\$.+)\);/ do |match|
               match.gsub /; /, ', '
             end
             file = apply_mixin_parent_selector(file, '\.input-(?:sm|lg|hg)')
           when 'modules/input-groups.less'
-            file = replace_all file, "\t", "  "
             file = replace_rules(file, '.input-group-rounded') do |rule|
               extract_and_combine_nested_rules rule
             end
+          when 'modules/glyphicons.less'
+            file = replace_vars(file)
+            file = replace_escaping(file)
+            file = replace_all file, /\#\{(url\(.*?\))}/, '\1'
+            file = replace_rules(file, '@font-face') { |rule|
+              rule = replace_all rule, /(\$icon-font(?:-\w+)+)/, '#{\1}'
+              replace_asset_url rule, :font
+            }
           when 'modules/login.less'
             file = fix_flat_ui_image_assets file
           when 'modules/navbar.less'
-            file = replace_all file, "\t", "  "
             # Fix mixin regex not supporting non-variable arguments
             file.gsub! /@include input-size\((?:\$.+)\);/ do |match|
               match.gsub /; /, ', '
@@ -118,6 +120,19 @@ class Converter
             file = fix_flat_ui_image_assets file
           when 'modules/todo.less'
             file = fix_flat_ui_image_assets file
+          when 'modules/thumbnails.less'
+            file = extract_nested_rule file, 'a&'
+          when 'modules/type.less'
+            # Since .bg-primary has a color associated with it we need to divide it into
+            # two selectors
+            file = replace_rules(file, '.bg-primary') do |rule|
+              parts = rule.split "\n"
+              selector = parts.index {|line| line =~ /\.bg-primary/}
+              mixin = parts.index {|line| line =~ /@include/}
+              parts.insert(mixin, "}\n#{parts[selector]}")
+              rule = parts.join "\n"
+            end
+            file = apply_mixin_parent_selector(file, '\.(text|bg)-(success|primary|info|warning|danger)')
         end
 
         name    = name.sub(/\.less$/, '.scss')
@@ -169,7 +184,7 @@ class Converter
       rule += "}\n"
     end
 
-    # TODO this method is a on the brittle side
+    # TODO this method is on the brittle side
     # look into make it more robust
     def fix_variable_declaration_order(file)
       # Spinner needs to be moved after Buttons
@@ -197,7 +212,21 @@ class Converter
       file
     end
 
-    # Methods overriden from the bootstrap-sass converter
+    def fix_relative_asset_url(rule, type)
+      # Use a really naive pluralization
+      replace_all rule, /url\(['"]?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)['"]?\)/, "url(\"#{@output_dir}/\\1\")"
+    end
+
+    def fix_flat_ui_image_assets(file)
+      file = replace_all file, /\#\{(url\(.*?\).*?)}/, '\1'
+      file = fix_relative_asset_url file, :image
+      file = replace_asset_url file, :image
+    end
+
+    #
+    # Methods overridden from the bootstrap-sass converter
+    #
+
     def replace_asset_url(rule, type)
       replace_all rule, /url\((.*?)\)/, "url(if($flat-ui-sass-asset-helper, flat-ui-#{type}-path(\\1), \\1))"
     end
@@ -218,19 +247,8 @@ class Converter
       less.gsub(/(?<![\-$@.])spin(?![\-\w])/, 'adjust-hue')
     end
 
-    def fix_relative_asset_url(rule, type)
-      # Use a really naive pluralization
-      replace_all rule, /url\(['"]?\.\.\/#{type}s\/([a-zA-Z0-9\-\/\.\?#]+)['"]?\)/, "url(\"#{@output_dir}/\\1\")"
-    end
-
-    def fix_flat_ui_image_assets(file)
-      file = replace_all file, /\#\{(url\(.*?\).*?)}/, '\1'
-      file = fix_relative_asset_url file, :image
-      file = replace_asset_url file, :image
-    end
-
     # Fix to support replacing mixin definitions with default args
-    # https://github.com/twbs/bootstrap-sass/blob/master/tasks/converter/less_conversion.rb#L286
+    # https://github.com/twbs/bootstrap-sass/blob/master/tasks/converter/less_conversion.rb#L293
     #
     # @mixin a() { tr& { color:white } }
     # to:
@@ -243,9 +261,13 @@ class Converter
         # insert param into mixin def
         mxn_css.sub!(/(@mixin [\w-]+)\(([\$\w\-:,\s]*)\)/) { "#{$1}(#{param}#{', ' if $2 && !$2.empty?}#{$2})" }
         # wrap properties in #{$parent} { ... }
-        replace_properties(mxn_css) { |props| props.strip.empty? ? props : "  \#{#{param}} { #{props.strip} }\n  " }
+        replace_properties(mxn_css) { |props|
+          next props if props.strip.empty?
+          spacer = ' ' * indent_width(props)
+          "#{spacer}\#{#{param}} {\n#{indent(props.sub(/\s+\z/, ''), 2)}\n#{spacer}}"
+        }
         # change nested& rules to nested#{$parent}
-        replace_rules(mxn_css, /.*&[ ,]/) { |rule| replace_in_selector rule, /&/, "\#{#{param}}" }
+        replace_rules(mxn_css, /.*&[ ,:]/) { |rule| replace_in_selector rule, /&/, "\#{#{param}}" }
       end
     end
   end
