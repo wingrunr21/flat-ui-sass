@@ -30,7 +30,7 @@ class Converter
         # icon-font bombs on this so skip it
         file = convert_less(file) unless name =~ /flat-ui|glyphicons/
         file = replace_file_imports(file)
-
+        file = cleanup_whitespace(file)
         case name
           when 'flat-ui.less'
             lines = file.split "\n"
@@ -56,8 +56,10 @@ class Converter
               file = parameterize_mixin_parent_selector file, mixin
             end
             file = replace_ms_filters(file)
-            # calc-color mixin only exists in Flat-UI free
-            unless pro?
+            if pro?
+              file = replace_all file, /(?<=[.-])\$state/, '#{$state}'
+            else
+              # calc-color mixin only exists in Flat-UI free
               file = replace_all file, /-(\$.+-color)/, '-#{\1}'
               file = replace_all file, /#\{\$\$\{(.+)\}\}/, 'interpolate_variable($\1)'
             end
@@ -133,6 +135,12 @@ class Converter
               rule = parts.join "\n"
             end
             file = apply_mixin_parent_selector(file, '\.(text|bg)-(success|primary|info|warning|danger)')
+          when 'modules/video.less'
+            file = replace_rules(file, /\s*\.vjs(?:-(?:control|time))?(?!-\w+)/) do |rule|
+              selector = get_selector(rule).scan(/\.vjs(?:-(?:control|time))?(?!-\w+)/).first
+              convert_arbitrary_less_ampersand(rule, selector)
+            end
+            file = fix_flat_ui_image_assets file
         end
 
         name    = name.sub(/\.less$/, '.scss')
@@ -221,6 +229,32 @@ class Converter
       file = replace_all file, /\#\{(url\(.*?\).*?)}/, '\1'
       file = fix_relative_asset_url file, :image
       file = replace_asset_url file, :image
+    end
+
+    def cleanup_whitespace(file)
+      file.gsub(/\r|\t/, "")
+    end
+
+    # Based on the original convert_less_ampersand but modified
+    # for flat_ui_sass
+    def convert_arbitrary_less_ampersand(less, selector)
+      return less unless less.include?(selector)
+
+      styles = less.dup
+      tmp = "\n"
+      less.scan(/^(\s*&)(-[\w\[\]-]+\s*\{.+?})/m) do |ampersand, css|
+        tmp << "#{selector}#{unindent(css)}\n"
+        styles.gsub! "#{ampersand}#{css}", ""
+      end
+
+      if tmp.length > 1
+        styles.gsub!(/\s*#{"\\"+selector}\s*\{\s*}/m, '')
+        styles << tmp
+      else
+        styles = less
+      end
+
+      styles
     end
 
     #
