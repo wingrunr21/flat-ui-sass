@@ -40,7 +40,7 @@ class Converter
   include FlatUIFontsConversion
   include FlatUIImageConversion
 
-  def initialize(type = :free, src_path = './flat-ui', dest_path = {})
+  def initialize(type = :free, src_path = './flat-ui')
     @logger     = Logger.new
     @src_path = File.expand_path(src_path)
     @type = type
@@ -50,7 +50,7 @@ class Converter
       scss: File.join('vendor/assets/stylesheets', @output_dir),
       fonts: File.join('vendor/assets/fonts', @output_dir),
       images: File.join('vendor/assets/images', @output_dir)
-    }.merge(dest_path)
+    }
   end
 
   def_delegators :@logger, :log, :log_status, :log_processing, :log_transform, :log_file_info, :log_processed, :log_http_get_file, :log_http_get_files, :silence_log
