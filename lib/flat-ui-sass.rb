@@ -24,6 +24,15 @@ module FlatUI
       @gem_path ||= File.expand_path '..', File.dirname(__FILE__)
     end
 
+    # This definitely needs a better solution
+    def project_path
+      @project_path ||= Dir.pwd
+    end
+
+    def base_path
+      @base_path ||= pro? ? project_path : gem_path
+    end
+
     def stylesheets_path
       File.join assets_path, 'stylesheets'
     end
@@ -41,7 +50,7 @@ module FlatUI
     end
 
     def assets_path
-      @assets_path ||= File.join gem_path, 'vendor', 'assets'
+      @assets_path ||= File.join base_path, 'vendor', 'assets'
     end
 
     # Environment detection helpers
@@ -58,7 +67,7 @@ module FlatUI
     end
 
     def pro?
-      Dir.exists? File.join(stylesheets_path, 'flat-ui-pro')
+      Dir.exists? File.join(project_path, 'vendor/assets/stylesheets/flat-ui-pro')
     end
 
     private
