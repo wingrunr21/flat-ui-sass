@@ -70,13 +70,20 @@ class Converter
             file = convert_grid_mixins file
           when 'variables.less'
             file = insert_default_vars(file)
-            file = unindent <<-SCSS + file, 14
+            if ::Sass::VERSION >= '3.3.0'
+              file = unindent <<-SCSS + file, 14
               // a flag to toggle asset pipeline / compass integration
-              // defaults to true if twbs-font-path function is present (no function => twbs-font-path('') parsed as string == right side)
-              // in Sass 3.3 this can be improved with: function-exists(twbs-font-path)
               $flat-ui-sass-asset-helper: function-exists(flat-ui-font-path) !default;
 
-            SCSS
+              SCSS
+            else
+              file = unindent <<-SCSS + file, 14
+              // a flag to toggle asset pipeline / compass integration
+              // defaults to true if flat-ui-font-path function is present (no function => twbs-font-path('') parsed as string == right side)
+              $flat-ui-sass-asset-helper: (flat-ui-font-path("") != unquote('flat-ui-font-path("")')) !default;
+
+              SCSS
+            end
             file = fix_variable_declaration_order file
             file = replace_all file, /(\$icon-font-path:\s+).*(!default)/, '\1"'+@output_dir+'/" \2'
           when 'modules/buttons.less'

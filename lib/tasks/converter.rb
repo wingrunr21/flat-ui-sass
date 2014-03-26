@@ -19,6 +19,7 @@ require 'json'
 require 'fileutils'
 require 'term/ansicolor'
 require 'forwardable'
+require 'sass'
 
 # Pull in stuff from bootstrap-sass
 spec = Bundler.load.specs.find{|s| s.name == 'bootstrap-sass'}
