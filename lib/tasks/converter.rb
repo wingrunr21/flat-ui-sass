@@ -21,9 +21,9 @@ require 'term/ansicolor'
 require 'forwardable'
 
 # Pull in stuff from bootstrap-sass
-spec = Bundler.load.specs.find{|s| s.name == 'bootstrap-sass'}
+spec = Gem::Specification.find_by_name('bootstrap-sass')
 %w{logger char_string_scanner less_conversion}.each do |file|
-  require File.join(spec.full_gem_path, 'tasks', 'converter', file) 
+  require File.join(spec.gem_dir, 'tasks', 'converter', file)
 end
 
 require_relative 'converter/flat_ui_less_conversion'
