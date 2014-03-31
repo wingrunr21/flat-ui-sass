@@ -17,6 +17,14 @@ Flat-UI uses the [Lato](https://www.google.com/fonts/specimen/Lato)
 font as its base font. This gem does not vendor Lato. It is up to you to make
 sure Lato is available on your page.
 
+#### Notice:
+
+The preferred version of sass is v3.3.0+. Unfortunately, this version is not
+supported by sass-rails >= v4.0.2. If you run on sass v3.2.x, the only thing
+that will not work properly is the color swatch module in Flat-UI Free. The only
+other difference is in how the Flat-UI asset helper is discovered (see
+`_variables.scss`).
+
 ## Installation
 
 ### Rails
