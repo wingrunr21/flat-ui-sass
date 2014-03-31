@@ -8,7 +8,7 @@ Rails, Compass, and vanilla SASS.
 
 ## Dependencies
 
-`flat-ui-sass` requires [`bootstrap-sass`](https://github.com/twbs/bootstrap-sass) as well as `sass >= 3.3.0.rc.2`.
+`flat-ui-sass` requires [`bootstrap-sass`](https://github.com/twbs/bootstrap-sass)
 
 `flat-ui-sass` depends on `term-ansicolor` right now for the logging
 functionality of the converter. This is on the roadmap for removal.
