@@ -179,6 +179,8 @@ In addition, Flat-UI Pro also requires:
 1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
 3. Remove `term-ansicolor` dependency in converter
 4. More user-friendly logging (less verbose)
+5. Possible bower support
+6. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
 
 ## Development and Contributing
 
@@ -203,8 +205,6 @@ converter works against are in `version.rb`
 3. Create a new topic branch for your changes (`git checkout -b my_new_feature`)
 4. Make some changes
 5. Run `rake flat_ui:convert` to convert Flat-UI and vendor it
-6. Possible bower support
-7. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
 
 ## Credits
 
@@ -212,5 +212,3 @@ The conversion scripts and general gem structure rely upon and are heavily
 influenced by the work done on [bootstrap-sass](https://github.com/twbs/bootstrap-sass). This gem would not be possible without all of the hard work put into that project.
 
 Thanks also go to [Designmodo](http://designmodo.com/) for creating and publishing Flat-UI.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wingrunr21/flat-ui-sass/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
