@@ -19,6 +19,7 @@ require 'json'
 require 'fileutils'
 require 'term/ansicolor'
 require 'forwardable'
+require 'sass'
 
 # Pull in stuff from bootstrap-sass
 spec = Gem::Specification.find_by_name('bootstrap-sass')

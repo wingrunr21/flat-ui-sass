@@ -48,8 +48,9 @@ module Sass::Script::Functions
   end
 
   # Based on https://github.com/edwardoriordan/sass-utilities/blob/master/lib/sass-utilities.rb
+  # For Sass < 3.3.0, just echo back the variable since we can't interpolate it
   def interpolate_variable(name)
     assert_type name, :String
-    environment.var(name.value)
+    ::Sass::VERSION >= '3.3.0' ? environment.var(name.value) : name
   end
 end
