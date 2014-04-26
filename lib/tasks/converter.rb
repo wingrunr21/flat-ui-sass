@@ -17,13 +17,12 @@
 
 require 'json'
 require 'fileutils'
-require 'term/ansicolor'
 require 'forwardable'
 require 'sass'
 
 # Pull in stuff from bootstrap-sass
 spec = Gem::Specification.find_by_name('bootstrap-sass')
-%w{logger char_string_scanner less_conversion}.each do |file|
+%w{char_string_scanner less_conversion}.each do |file|
   require File.join(spec.gem_dir, 'tasks', 'converter', file)
 end
 
@@ -32,6 +31,7 @@ require_relative 'converter/flat_ui_js_conversion'
 require_relative 'converter/flat_ui_fonts_conversion'
 require_relative 'converter/flat_ui_images_conversion'
 require_relative 'converter/filesystem'
+require_relative 'converter/logger'
 
 class Converter
   extend Forwardable
@@ -41,8 +41,8 @@ class Converter
   include FlatUIFontsConversion
   include FlatUIImageConversion
 
-  def initialize(type = :free, src_path = './flat-ui')
-    @logger     = Logger.new
+  def initialize(type = :free, src_path = './flat-ui', options = {})
+    @logger     = Logger.new(options[:log_level])
     @src_path = File.expand_path(src_path)
     @type = type
     @output_dir = type == :free ? 'flat-ui' : 'flat-ui-pro'
@@ -54,17 +54,17 @@ class Converter
     }
   end
 
-  def_delegators :@logger, :log, :log_status, :log_processing, :log_transform, :log_file_info, :log_processed, :log_http_get_file, :log_http_get_files, :silence_log
+  def_delegators :@logger, :log, :log_status, :log_processing, :log_transform, :log_file_info, :log_processed
 
   def process_flat_ui!
     log_status 'Convert Flat UI from LESS to SASS'
-    puts "   type: #{@output_dir}"
-    puts "  input: #{@src_path}"
-    puts " output:"
-    puts "     js: #{@dest_path[:js]}"
-    puts "   scss: #{@dest_path[:scss]}"
-    puts "  fonts: #{@dest_path[:fonts]}"
-    puts " images: #{@dest_path[:images]}"
+    log "   type: #{@output_dir}"
+    log "  input: #{@src_path}"
+    log " output:"
+    log "     js: #{@dest_path[:js]}"
+    log "   scss: #{@dest_path[:scss]}"
+    log "  fonts: #{@dest_path[:fonts]}"
+    log " images: #{@dest_path[:images]}"
 
     setup_file_structure!
 
