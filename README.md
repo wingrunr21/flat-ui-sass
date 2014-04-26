@@ -85,7 +85,7 @@ flat-ui-sass if you are using Flat-UI Free:
 If you are using Flat-UI Pro, you can copy or symlink the various assets out of
 the local vendor/assets directory in the root of your project.
 
-Similarly to bootstrap-sass, we provide Ruby method to report the appropriate
+Similar to bootstrap-sass, we provide Ruby methods to report the appropriate
 paths:
 
     FlatUI.stylesheets_path
