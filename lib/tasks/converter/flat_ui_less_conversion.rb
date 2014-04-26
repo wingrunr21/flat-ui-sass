@@ -168,6 +168,15 @@ class Converter
       end
     end
 
+    # Set load_shared to read from mixins.less again since bootstrap converted to
+    # modular mixins.
+    def load_shared
+      @shared_mixins ||= begin
+        log_status '  Reading shared mixins from mixins.less'
+        read_mixins read_files('less', ['mixins.less'])['mixins.less'], nested: NESTED_MIXINS
+      end
+    end
+
     def extract_and_combine_nested_rules(file)
       matches = Hash.new {|k,v| k[v] = []}
       file = file.dup
