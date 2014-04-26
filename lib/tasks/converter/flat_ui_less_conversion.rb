@@ -115,6 +115,10 @@ class Converter
               match.gsub /; /, ', '
             end
             file = apply_mixin_parent_selector(file, '\.navbar-input')
+          when 'modules/palette.less'
+            file.gsub! /@include calc-color\((.+)\);/ do |match|
+              match.gsub /#\{([\w\-]+)\}/, '"\1"'
+            end
           when 'modules/select.less'
             # Fix the include that the converter makes an extend
             file = replace_all file, /@extend \.caret/, '@include caret'

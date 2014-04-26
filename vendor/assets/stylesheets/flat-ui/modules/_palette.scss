@@ -35,17 +35,17 @@
 //
 // Pallet grid
 // --------------------------------------------------
-@include calc-color(#{turquoise}, #{green-sea});
-@include calc-color(#{emerald}, #{nephritis});
-@include calc-color(#{peter-river}, #{belize-hole});
-@include calc-color(#{amethyst}, #{wisteria});
-@include calc-color(#{wet-asphalt}, #{midnight-blue});
+@include calc-color("turquoise", "green-sea");
+@include calc-color("emerald", "nephritis");
+@include calc-color("peter-river", "belize-hole");
+@include calc-color("amethyst", "wisteria");
+@include calc-color("wet-asphalt", "midnight-blue");
 
-@include calc-color(#{sun-flower}, #{orange});
-@include calc-color(#{carrot}, #{pumpkin});
-@include calc-color(#{alizarin}, #{pomegranate});
-@include calc-color(#{clouds}, #{silver});
-@include calc-color(#{concrete}, #{asbestos});
+@include calc-color("sun-flower", "orange");
+@include calc-color("carrot", "pumpkin");
+@include calc-color("alizarin", "pomegranate");
+@include calc-color("clouds", "silver");
+@include calc-color("concrete", "asbestos");
 
 .palette-clouds {
   color: #bdc3c7;
