@@ -185,10 +185,9 @@ In addition, Flat-UI Pro also requires:
 ## Roadmap
 
 1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
-3. Remove `term-ansicolor` dependency in converter
-4. More user-friendly logging (less verbose)
-5. Possible bower support
-6. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
+2. bower support
+3. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
+4. Tests
 
 ## Development and Contributing
 
