@@ -125,6 +125,20 @@ For Flat-UI Pro, simply import `flat-ui-pro` instead:
 You must import the Flat-UI variables before bootstrap, otherwise bootstrap's
 variables will take priority!
 
+##### Missing Modules
+
+Flat-UI Pro does not include a few modules that exist in Flat-UI Free.
+Designmodo has stated this is because [they are not yet mobile-ready](https://github.com/designmodo/Flat-UI-Pro-Support/issues/419#issuecomment-39879885). If you
+still wish to use these modules, you can import them from this gem's version of
+Flat-UI Free:
+
+    @import 'flat-ui/modules/footer';
+    @import 'flat-ui/modules/login';
+    @import 'flat-ui/modules/palette';
+    @import 'flat-ui/modules/share';
+    @import 'flat-ui/modules/tile';
+    @import 'flat-ui/modules/todo';
+
 #### Javascript
 Flat-UI has a lot of javascript dependencies. It is up to you to make sure the
 appropriate javascript files are available in your application. For a reference,
@@ -207,9 +221,8 @@ A Rails helper is also included to aid with using the Flat-UI glyph icons:
 
 ## Roadmap
 
-1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
-2. bower support
-3. Tests
+1. bower support
+2. Tests
 
 ## Development and Contributing
 
