@@ -182,12 +182,34 @@ In addition, Flat-UI Pro also requires:
 * typeahead.js
 * holder.js
 
+#### Icon Helper
+A Rails helper is also included to aid with using the Flat-UI glyph icons:
+
+    fui_icon "heart"
+    # => <i class="fui-heart"></i>
+
+    fui_icon "heart", tag: :span
+    # => <span class="fui-heart"></span>
+
+    fui_icon "heart", text: "Flat-UI!"
+    # => <i class="fui-heart"></i> Flat-UI!
+    fui_icon "arrow-right", text: "Get started", right: true
+    # => Get started <i class="fui-arrow-right"></i>
+
+    fui_icon "photo", class: "pull-left"
+    # => <i class="fui-photo pull-left"></i>
+
+    fui_icon "user", data: { id: 123 }
+    # => <i class="fui-user" data-id="123"></i>
+
+    content_tag(:li, fui_icon("check", text: "Bulleted list item"))
+    # => <li><i class="fui-check"></i> Bulleted list item</li>
+
 ## Roadmap
 
 1. Add Flat-UI modules that are missing in Flat-UI Pro to the Pro manifest
 2. bower support
-3. Rails ActionView helpers for fui icons similar to how [font-awesome-rails](https://github.com/bokmann/font-awesome-rails/blob/master/app/helpers/font_awesome/rails/icon_helper.rb) does it
-4. Tests
+3. Tests
 
 ## Development and Contributing
 

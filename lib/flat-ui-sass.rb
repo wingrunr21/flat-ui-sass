@@ -93,5 +93,6 @@ module FlatUI
     end
   end
 end
+FlatUi = FlatUI
 
 FlatUI.load!
