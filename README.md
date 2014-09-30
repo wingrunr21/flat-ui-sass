@@ -97,6 +97,9 @@ paths:
 
 ### Converting Flat-UI Pro
 
+**NOTE:** Support for Flat-UI Pro (and converting to SASS) is currently only available under MRI 2.0 and above.
+Users on other Ruby versions can still use Flat-UI Free.
+
 You can use the `fui_convert` command packaged along with `flat-ui-sass` to
 automatically convert and vendor Flat-UI Pro to your local application:
 
