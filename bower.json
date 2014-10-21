@@ -1,0 +1,39 @@
+{
+  "name": "flat-ui-sass",
+  "version": "0.0.0",
+  "homepage": "https://github.com/wingrunr21/flat-ui-sass",
+  "authors": [
+    {
+      "name": "Stafford Brunk",
+      "email": "stafford.brunk@gmail.com",
+      "homepage": "http://staffordb.ru/nk"
+    }
+  ],
+  "description": "flat-ui-sass is a SASS port of Designmodo's Flat-UI Free",
+  "main": [
+    "vendor/assets/stylesheets/flat-ui.scss",
+    "vendor/assets/fonts/flat-ui/flat-ui-icons-regular.eot",
+    "vendor/assets/fonts/flat-ui/flat-ui-icons-regular.svg",
+    "vendor/assets/fonts/flat-ui/flat-ui-icons-regular.ttf",
+    "vendor/assets/fonts/flat-ui/flat-ui-icons-regular.woff",
+    "vendor/assets/javascripts/flat-ui.js",
+    "vendor/assets/javascripts/flatui-checkbox.js",
+    "vendor/assets/javascripts/flatui-radio.js"
+  ],
+  "keywords": [
+    "flat-ui",
+    "bootstrap",
+    "scss",
+    "sass"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "~3.0.2"
+  }
+}
