@@ -21,7 +21,7 @@ class Converter
 
     def flat_ui_js_files
       @flat_ui_js_files ||= Dir.chdir "#{@src_path}/js" do
-        Dir['flatui-*.js']
+        Dir['*.js']
       end
     end
   end
