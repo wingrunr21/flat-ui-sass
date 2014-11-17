@@ -89,5 +89,6 @@ class Converter
     end
 
     FileUtils.mkdir_p("#{@dest_path[:scss]}/modules")
+    FileUtils.mkdir_p("#{@dest_path[:scss]}/mixins")
   end
 end
