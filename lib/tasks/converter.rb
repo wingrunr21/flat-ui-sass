@@ -20,12 +20,6 @@ require 'fileutils'
 require 'forwardable'
 require 'sass'
 
-# Pull in stuff from bootstrap-sass
-spec = Gem::Specification.find_by_name('bootstrap-sass')
-%w{char_string_scanner less_conversion}.each do |file|
-  require File.join(spec.gem_dir, 'tasks', 'converter', file)
-end
-
 require_relative 'converter/flat_ui_less_conversion'
 require_relative 'converter/flat_ui_js_conversion'
 require_relative 'converter/flat_ui_fonts_conversion'
