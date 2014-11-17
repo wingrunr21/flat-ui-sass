@@ -6,13 +6,13 @@ class Converter
       flat_ui_image_files.each do |file|
         new_file = "#{save_to}/#{file}"
         FileUtils.mkdir_p(File.dirname(new_file))
-        FileUtils.cp "#{@src_path}/images/#{file}", new_file
+        FileUtils.cp "#{@src_path}/img/#{file}", new_file
       end
     end
 
     def flat_ui_image_files
-      @flat_ui_image_files ||= Dir.chdir "#{@src_path}/images" do
-        Dir['{switch,tile,todo,icons,login,video}/**/*.*']
+      @flat_ui_image_files ||= Dir.chdir "#{@src_path}/img" do
+        Dir['{tile,icons,login}/**/*.*']
       end
     end
   end
