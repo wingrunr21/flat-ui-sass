@@ -53,4 +53,5 @@ module Sass::Script::Functions
     assert_type name, :String
     ::Sass::VERSION >= '3.3.0' ? environment.var(name.value) : name
   end
+  declare :interpolate_variable, [:name]
 end
