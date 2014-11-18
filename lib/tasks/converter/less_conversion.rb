@@ -4,6 +4,8 @@ require_relative 'char_string_scanner'
 #
 # Most differences are fixed by regexps and other forms of string substitution.
 # There are Bootstrap-specific workarounds for the lack of parent selectors, recursion, mixin namespaces, extend within @media, etc in Sass 3.2.
+#
+# This has been extracted directly from bootstrap-sass. For Flat UI specific conversion rules, look at flat_ui_less_conversion.rb
 class Converter
   module LessConversion
     # Some regexps for matching bits of SCSS:
