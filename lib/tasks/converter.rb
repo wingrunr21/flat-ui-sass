@@ -61,6 +61,7 @@ class Converter
     log " images: #{@dest_path[:images]}"
 
     setup_file_structure!
+    copy_supporting_files!
 
     process_flat_ui_stylesheet_assets!
     process_flat_ui_javascript_assets!
@@ -90,5 +91,10 @@ class Converter
 
     FileUtils.mkdir_p("#{@dest_path[:scss]}/modules")
     FileUtils.mkdir_p("#{@dest_path[:scss]}/mixins")
+  end
+
+  def copy_supporting_files!
+    template_path = File.join(File.dirname(File.expand_path(__FILE__)),'converter/templates')
+    FileUtils.cp Dir["#{template_path}/*.scss"], "#{@dest_path[:scss]}/.."
   end
 end
