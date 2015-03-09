@@ -17,3 +17,4 @@ test/version_tmp
 tmp
 .DS_Store
 bower_components
+Session.vim
