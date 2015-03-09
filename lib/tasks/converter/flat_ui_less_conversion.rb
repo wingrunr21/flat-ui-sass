@@ -35,7 +35,7 @@ class Converter
         end
 
         case name
-        when 'flat-ui.less'
+        when 'flat-ui.less', 'flat-ui-pro.less'
           lines = file.split "\n"
           lines.reject! {|line|
             #kill variables since those need to be manually imported before bootstrap
@@ -71,8 +71,7 @@ class Converter
           file = replace_all file, /-(\$handle-name)/, '-#{\1}\2'
         when 'variables.less'
           file = insert_default_vars(file)
-          #TODO fix the unindent
-          file = unindent <<-SCSS + file, 14
+          file = unindent <<-SCSS + file, 12
             // a flag to toggle asset pipeline / compass integration
             // defaults to true if flat-ui-font-path function is present (no function => flat-ui-font-path('') parsed as string == right side)
             // in Sass 3.3 this can be improved with: function-exists(flatui-font-path)
@@ -154,14 +153,17 @@ class Converter
 
         name = name.sub(/\.less$/, '.scss')
         base = File.basename(name)
-        name.gsub!(base, "_#{base}") unless base == 'flat-ui.scss'
+        name.gsub!(base, "_#{base}") unless base == 'flat-ui.scss' || base == 'flat-ui-pro.scss'
         path = File.join(@dest_path[:scss], name)
         save_file(path, file)
         log_processed File.basename(path)
       end
 
       manifest = File.join(@dest_path[:scss], '..', "#{@output_dir}.scss")
-      save_file(manifest, "@import \"#{@output_dir}/flat-ui\";")
+      import_string = "@import \"#{@output_dir}/flat-ui"
+      import_string += "-pro" if pro?
+      import_string += "\";"
+      save_file(manifest, import_string)
     end
 
     def flat_ui_less_files
@@ -221,21 +223,41 @@ class Converter
     end
 
     def fix_variable_declaration_order(file)
+      lines = file.split("\n").push("")
+
       # Type needs to come after Misc variable
       # declarations
-      if file.include? 'Type'
-        lines = file.split("\n").push("")
-        type_start = lines.index {|l| l =~ /Type/} -1
+      if file.include?('Type')
+        type_start = lines.index {|l| l =~ /Type/} - 1
         type_end = lines.index {|l| l =~ /Miscellaneous/} - 1
+
+        blk = lines.slice!(type_start...type_end)
         misc_end = lines.index {|l| l =~ /^\$component-offset-horizontal/} + 1
-
-        (type_end - type_start).times do
-          lines.insert(misc_end, lines.delete_at(type_start))
-        end
-
-        file = lines.join("\n")
+        lines.insert(misc_end, *blk)
       end
-      file
+
+      # Form states have to come before file input (eg after forms)
+      if pro? && file.include?('== File input')
+        form_states_start = lines.index {|l| l =~ /== Form states and alerts/} -1
+        form_states_end = lines.index {|l| l =~ /== Tooltips/} - 1
+        file_input_start = lines.index {|l| l =~ /== File input/} - 1
+
+        blk = lines.slice!(form_states_start...form_states_end)
+        lines.insert(file_input_start, *blk)
+      end
+
+      # The second Form states and alerts needs to come
+      # after the Misc variables
+      if pro? && file.include?('== Form states and alerts')
+        type_start = lines.rindex {|l| l =~ /== Form states and alerts/} -1
+        type_end = lines.index {|l| l =~ /== Miscellaneous/} - 1
+
+        blk = lines.slice!(type_start...type_end)
+        misc_end = lines.index {|l| l =~ /^\$component-offset-horizontal/} + 1
+        lines.insert(misc_end, *blk)
+      end
+
+      lines.join("\n")
     end
 
     def fix_relative_asset_url(rule, type)
