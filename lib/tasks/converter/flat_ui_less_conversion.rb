@@ -81,9 +81,14 @@ class Converter
           file = replace_all file, /(\$icon-font-path:)(\s+)"..\/fonts\/(.+)\/"\s*(!default)/, '\1\2"'+@output_dir+'/\3/" \4'
           file = replace_all file, /(\$local-font-path:)(\s+)"..\/fonts\/(.+)\/"\s*(!default)/, '\1\2"'+@output_dir+'/\3/" \4'
           file = fix_variable_declaration_order file
+        when 'modules/badges.less'
+          file = extract_nested_rule file, 'a&'
         when 'modules/buttons.less'
           file = extract_nested_rule file, '.btn-xs&'
           file = extract_nested_rule file, '.btn-hg&'
+        when 'modules/datatables.less'
+          # TODO fix
+          file = replace_all file, /^(\s*@extend \.pagination) all/, '\1'
         when 'modules/dropdowns.less'
           dropdown_menu_right = unindent extract_rule_content(file, '.dropdown-menu-right')
           dropdown_menu_left = unindent extract_rule_content(file, '.dropdown-menu-left')
@@ -106,6 +111,8 @@ class Converter
             rule = replace_all rule, /(\$icon-font(?:-\w+)+)/, '#{\1}'
             replace_asset_url rule, :font
           }
+        when 'modules/labels.less'
+          file = extract_nested_rule file, 'a&'
         when 'modules/local-fonts.less'
           file = flat_ui_font_files.reject{|p| File.dirname(p) =~ /glyphicons/}
                                    .map { |p| %Q(//= depend_on "#{@output_dir}/#{File.dirname(p)}/#{File.basename(p)}") } * "\n" + "\n" + file
@@ -129,6 +136,8 @@ class Converter
           file = extract_nested_rule file, '.select2-container&'
           file = apply_mixin_parent_selector(file, '\.multiselect-(?:default|primary|info|danger|success|warning|inverse)')
           file = replace_all file, '@extend .form-control all, .input-sm all;', "@extend .form-control;\n    @extend .input-sm;"
+        when 'modules/spinner.less'
+
         when 'modules/switch.less'
           file = replace_all file, /\.(\$switch-name)(.*)$/, '.#{\1}\2'
         when 'modules/thumbnails.less'
@@ -358,6 +367,42 @@ class Converter
         }
         # change nested& rules to nested#{$parent}
         replace_rules(mxn_css, /.*&[ ,:]/) { |rule| replace_in_selector rule, /&/, "\#{#{param}}" }
+      end
+    end
+
+    # This doesn't take into account mixins called with non-variable args:
+    #   eg @include mixin(1px; 2px; 3px) could get output
+    #
+    # @include and @extend from LESS:
+    #  .mixin()             -> @include mixin()
+    #  #scope > .mixin()    -> @include scope-mixin()
+    #  &:extend(.mixin all) -> @include mixin()
+    def replace_mixins(less, mixin_names)
+      mixin_pattern = /(\s+)(([#|\.][\w-]+\s*>\s*)*)\.([\w-]+\(.*\))(?!\s\{)/
+
+      less = less.gsub(mixin_pattern) do |match|
+        matches = match.scan(mixin_pattern).flatten
+        scope   = matches[1] || ''
+        if scope != ''
+          scope = scope.scan(/[\w-]+/).join('-') + '-'
+        end
+        mixin_name = match.scan(/\.([\w-]+)\(.*\)\s?\{?/).first
+        if mixin_name && mixin_names.include?("#{scope}#{mixin_name.first}")
+          "#{matches.first}@include #{scope}#{matches.last}".gsub(/; \$/, ", $").sub(/;\)$/, ')').gsub(/; ([\d\w]+)/, ', \1')
+        else
+          "#{matches.first}@extend .#{scope}#{matches.last.gsub(/\(\)/, '')}"
+        end
+      end
+
+      less.gsub /&:extend\((#{SELECTOR_RE})(?: all)?\)/ do
+        selector = $1
+        selector =~ /\.([\w-]+)/
+        mixin    = $1
+        if mixin && mixin_names.include?(mixin)
+          "@include #{mixin}()"
+        else
+          "@extend #{selector}"
+        end
       end
     end
   end
