@@ -1,0 +1,57 @@
+// Select variants
+//
+
+@mixin select-variant($color, $background, $hover-background, $active-background, $disabled-background: $gray-light, $arrow-color: $inverse) {
+  .select2-choice {
+    color: $color;
+    background-color: $background;
+
+    &:hover,
+    &.hover,
+    &:focus,
+    &:active {
+      color: $color;
+      background-color: $hover-background;
+      border-color: $hover-background;
+    }
+    &:active {
+      background: $active-background;
+      border-color: $active-background;
+    }
+    // [converter] extracted .select2-container-disabled& to .select2-container-disabled.select2-choice
+
+    .select2-arrow {
+      border-top-color: $arrow-color;
+    }
+  }
+
+  .select2-container-disabled.select2-choice {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $disabled-background;
+      border-color: $background;
+    }
+  }
+}
+
+@mixin select-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  @include button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius);
+  padding-right: ($padding-horizontal * 2 + 9px);
+}
+
+// [converter] $parent hack
+@mixin multiple-select-variant($parent, $background, $hover-background, $border-color) {
+  .select2-container-multi#{$parent} {
+      border-color: $border-color;
+
+      .select2-search-choice {
+        background-color: $background;
+
+        #{$parent}:hover {
+          background-color: $hover-background;
+        }
+      }
+  }
+}

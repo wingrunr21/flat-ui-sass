@@ -8,7 +8,7 @@
   margin: 0 0 20px 20px;
 }
 .palette {
-  font-size: ceil($component-font-size-base * 0.933); // ~14px
+  font-size: ceil(($component-font-size-base * 0.933)); // ~14px
   line-height: 1.214; // ~17px
   color: $inverse;
   margin: 0;
@@ -22,30 +22,30 @@
   dt {
     display: block;
     font-weight: bold;
-    @include opacity(.8);
+    opacity: .8;
   }
   dd {
     font-weight: 300;
-    margin-left: 0;    
-    @include opacity(.8);
+    margin-left: 0;
+    opacity: .8;
     -webkit-font-smoothing: subpixel-antialiased;
-  }  
+  }
 }
 
 //
 // Pallet grid
 // --------------------------------------------------
-@include calc-color("turquoise", "green-sea");
-@include calc-color("emerald", "nephritis");
-@include calc-color("peter-river", "belize-hole");
-@include calc-color("amethyst", "wisteria");
-@include calc-color("wet-asphalt", "midnight-blue");
+@include pallet-variant("turquoise", "green-sea");
+@include pallet-variant("emerald", "nephritis");
+@include pallet-variant("peter-river", "belize-hole");
+@include pallet-variant("amethyst", "wisteria");
+@include pallet-variant("wet-asphalt", "midnight-blue");
 
-@include calc-color("sun-flower", "orange");
-@include calc-color("carrot", "pumpkin");
-@include calc-color("alizarin", "pomegranate");
-@include calc-color("clouds", "silver");
-@include calc-color("concrete", "asbestos");
+@include pallet-variant("sun-flower", "orange");
+@include pallet-variant("carrot", "pumpkin");
+@include pallet-variant("alizarin", "pomegranate");
+@include pallet-variant("clouds", "silver");
+@include pallet-variant("concrete", "asbestos");
 
 .palette-clouds {
   color: #bdc3c7;
@@ -59,7 +59,7 @@
 
   span {
     color: #bdc3c7;
-  }  
+  }
 }
 
 // Headline
