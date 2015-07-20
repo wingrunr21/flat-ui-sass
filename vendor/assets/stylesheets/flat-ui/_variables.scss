@@ -111,9 +111,9 @@ $headings-color:                inherit !default;
 //
 //## Specify custom locations of the include Flat UI icon font.
 
-$icon-font-path:                "flat-ui/glyphicons/" !default;
-$icon-font-name:                "flat-ui-icons-regular" !default;
-$icon-font-svg-id:              "flat-ui-icons-regular" !default;
+$flat-ui-icon-font-path:                "flat-ui/glyphicons/" !default;
+$flat-ui-icon-font-name:                "flat-ui-icons-regular" !default;
+$flat-ui-icon-font-svg-id:              "flat-ui-icons-regular" !default;
 
 //** Icon sizes for use in components
 $icon-normal:                   16px !default;
