@@ -115,12 +115,16 @@ See `fui_convert --help` for more advanced usage
 
 Import the Flat-UI variables, bootstrap, and then Flat-UI:
 
+    @import 'bootstrap-sprockets';
+    @import 'flat-ui-sprockets';
     @import 'flat-ui/variables';
     @import 'bootstrap';
     @import 'flat-ui';
 
 For Flat-UI Pro, simply import `flat-ui-pro` instead:
 
+    @import 'bootstrap-sprockets';
+    @import 'flat-ui-sprockets';
     @import 'flat-ui-pro/variables';
     @import 'bootstrap';
     @import 'flat-ui-pro';

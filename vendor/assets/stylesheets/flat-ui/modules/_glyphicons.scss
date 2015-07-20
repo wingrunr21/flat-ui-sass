@@ -8,11 +8,11 @@
 
 @font-face {
   font-family: 'Flat-UI-Pro-Icons';
-  src: url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$icon-font-path}#{$icon-font-name}.eot'), '#{$icon-font-path}#{$icon-font-name}.eot'));
-  src: url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$icon-font-path}#{$icon-font-name}.eot?#iefix'), '#{$icon-font-path}#{$icon-font-name}.eot?#iefix')) format('embedded-opentype'),
-       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$icon-font-path}#{$icon-font-name}.woff'), '#{$icon-font-path}#{$icon-font-name}.woff')) format('woff'),
-       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$icon-font-path}#{$icon-font-name}.ttf'), '#{$icon-font-path}#{$icon-font-name}.ttf')) format('truetype'),
-       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$icon-font-path}#{$icon-font-name}.svg##{$icon-font-svg-id}'), '#{$icon-font-path}#{$icon-font-name}.svg##{$icon-font-svg-id}')) format('svg');
+  src: url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.eot'), '#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.eot'));
+  src: url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.eot?#iefix'), '#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.eot?#iefix')) format('embedded-opentype'),
+       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.woff'), '#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.woff')) format('woff'),
+       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.ttf'), '#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.ttf')) format('truetype'),
+       url(if($flat-ui-sass-asset-helper, flat-ui-font-path('#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.svg##{$flat-ui-icon-font-svg-id}'), '#{$flat-ui-icon-font-path}#{$flat-ui-icon-font-name}.svg##{$flat-ui-icon-font-svg-id}')) format('svg');
 }
 
 [class^="fui-"],
